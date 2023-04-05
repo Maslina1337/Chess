@@ -940,8 +940,8 @@ body .chess_section section {
   background-image: url(img/field10.png);
   height: calc(100vmin - 100px);
   width: calc(100vmin - 100px);
-  min-width: 400px;
-  min-height: 400px;
+  /* min-width: 400px;
+  min-height: 400px; */
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -960,8 +960,8 @@ body .chess_section section {
   caret-color: transparent;
   height: calc((100vmin - 100px) / 8);
   width: calc((100vmin - 100px) / 8);
-  min-width: 50px;
-  min-height: 50px;
+  /* min-width: 50px;
+  min-height: 50px; */
   background-color: #ffffff00;
   background-size: contain;
   background-position: center;
