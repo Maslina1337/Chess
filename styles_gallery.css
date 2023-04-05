@@ -1,0 +1,1512 @@
+@font-face {
+  font-family: 'Butler';
+  src: url('fonts/Butler.eot');
+  src: url('fonts/Butler.eot?#iefix') format('embedded-opentype'),
+      url('fonts/Butler.woff2') format('woff2'),
+      url('fonts/Butler.woff') format('woff'),
+      url('fonts/Butler.ttf') format('truetype'),
+      url('fonts/Butler.svg#Butler') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: #272727;
+}
+body {
+  font-family: 'Montserrat', sans-serif;
+  padding: 20px;
+  /* width: 100%;
+  height: 100vh; */
+  background-color: #f0f0f0;
+  background-image: url(img/bg.aaeca019.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* body .glitch_effect {
+  background-image: url(img/7vr1.gif);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.1;
+} */
+
+body .dark_theme {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  position: absolute;
+  z-index: 30;
+  top: 50px;
+  right: 50px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+}
+body .dark_theme button {
+  margin-left: 20px;
+  padding: 0;
+  width: 4.2em;
+  height: 2em;
+  border-radius: 1em;
+  border: none;
+  background-color: #227a29;
+  transition: all 1s linear;
+}
+body .dark_theme button div {
+  height: 2em;
+  width: 2em;
+  border-radius: 1em;
+  background-color: #6fe334;
+  transform: translate(0) scale(1.2);
+  transition: all 0.1s ease-in;
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  margin: 20px;
+  background-color: #00000000;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 10px;
+  background-color: #9c9c9c;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #7b7b7b;
+}
+
+#attension {
+  position: fixed;
+  z-index: 20;
+  background-color: #121212cd;
+  width: 100vw;
+  height: 100vh;
+  padding: 5vh 10vw;
+  top: 0;
+  left: 0;
+
+  display: none;
+  /* display: flex; */
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+#attension .window{
+  max-height: 80vh;
+  overflow-y: scroll;
+  position: relative;
+  z-index: 22;
+  background-color: #121212;
+  padding: 40px 30px;
+  border-radius: 20px;
+  border: 6px solid #353535;
+  outline: 3px solid #121212;
+}
+
+#edit_profile {
+  color: #e0e0e0;
+  width: 100%;
+  /* height: 100%; */
+
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+#edit_profile h2{
+  margin-bottom: 20px;
+}
+
+#edit_profile .edit_info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: auto;
+}
+
+#edit_profile .edit_info .icon_box{
+  position: relative;
+  margin: 20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+#edit_profile .edit_info .icon_label{
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border-radius: 50px;
+  border: 3px solid #121212;
+  outline: 6px solid #353535;
+  /* outline-offset: 6px; */
+  background-image: url(img/mj.jpg);
+  background-size: cover;
+  background-position: center;
+  float: left;
+  cursor: pointer;
+  margin: 0;
+}
+
+#edit_profile .edit_info .icon{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+#edit_profile .edit_info .fade {
+  border-radius: inherit;
+  top: 0;
+  left: 0;
+  position: absolute;
+  pointer-events: none;
+  background-color: #232323ba;
+  background-image: url(img/pen.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  transition: all 0.2s ease-in-out;
+  opacity: 0;
+}
+
+#edit_profile .edit_info .icon_box:hover .fade {
+  opacity: 1;
+}
+
+#edit_profile .edit_info .name_form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  flex-wrap: nowrap;
+
+  flex-grow: 1;
+  flex-basis: 100px;
+
+  margin-bottom: 10px;
+}
+
+#edit_profile .edit_info .name_form .name_input:focus{
+  outline: 3px solid rgba(40, 100, 200, 0.6);
+}
+#edit_profile .mail_form .mail_input:focus{
+  outline: 3px solid rgba(40, 100, 200, 0.6);
+}
+#edit_profile .about_form .about_input:focus{
+  outline: 3px solid rgba(40, 100, 200, 0.6);
+}
+
+#edit_profile label {
+  margin-left: 10px;
+  margin-bottom: 5px;
+  color: #707070;
+}
+
+#edit_profile .edit_info .name_form .counter{
+  width: 100%;
+  min-width: 400px;
+  position: relative;
+  border-radius: 10px;
+  margin: 0;
+}
+
+#edit_profile .edit_info .name_form .counter::after{
+  top: 0;
+  right: 0;
+  position: absolute;
+  content: attr(string);
+  min-width: fit-content;
+  text-align: center;
+  width: 70px;
+  font-size: 16px;
+  background-color: #262626;
+  color: #b7b7b7;
+  padding: 10px 20px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  pointer-events: none;
+}
+
+#edit_profile .edit_info .name_input{
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: fit-content;
+  border: none;
+  border-radius: 10px;
+  background-color: #0b0b0b;
+  color: #f0f0f0;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  padding: 10px 130px 10px 20px;
+  outline: 0px solid rgba(40, 100, 200, 0.6);
+  transition: all 0.1s linear;
+}
+
+#edit_profile .mail_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  flex-wrap: nowrap;
+  
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#edit_profile .mail_input{
+  width: 100%;
+  min-width: 25vw;
+  border: none;
+  border-radius: 10px;
+  background-color: #0b0b0b;
+  color: #f0f0f0;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  padding: 10px 20px;
+  outline: 0px solid rgba(40, 100, 200, 0.6);
+  transition: all 0.1s linear;
+}
+
+#edit_profile .about_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  flex-wrap: nowrap;
+
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#edit_profile .about_input{
+  overflow: hidden;
+  resize: vertical;
+  width: 100%;
+  min-width: 25vw;
+  max-height: fit-content;
+  min-height: 40px;
+  border: none;
+  border-radius: 10px;
+  background-color: #0b0b0b;
+  color: #f0f0f0;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  padding: 10px 20px;
+  outline: 0px solid rgba(40, 100, 200, 0.6);
+  transition: all 0.1s linear;
+}
+
+#edit_profile .footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+#edit_profile .error {
+  animation: 0.6s error-appear-animation;
+  overflow: hidden;
+  display: none;
+  width: calc(100% - 20px);
+  background-color: #c01818;
+  text-align: center;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+@keyframes error-appear-animation{
+  0% {
+    transform: translate(0px);
+  }
+
+  20% {
+    transform: translate(10px);
+  }
+
+  40% {
+    transform: translate(-10px);
+  }
+
+  60% {
+    transform: translate(10px);
+  }
+
+  80% {
+    transform: translate(-10px);
+  }
+
+  100% {
+    transform: translate(0px);
+  }
+}
+
+#edit_profile button {
+  margin: 10px;
+  width: calc(50% - 20px);
+  max-width: 100%;
+  min-width: fit-content;
+  display: block;
+  transition: all 0.1s linear;
+  padding: 20px 60px;
+  border-radius: 40px;
+  background-color: #000000;
+  border: 6px solid #2e2e2e;
+  outline: 3px solid #000000;
+  color: #f0f0f0;
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  flex-grow: 1;
+  flex-basis: calc(50% - 20px);
+}
+
+#edit_profile button:hover {
+  background-color: #1a1a1a;
+}
+
+#settings {
+  color: #e0e0e0;
+  width: 100%;
+  /* height: 100%; */
+
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+#settings h2{
+  margin-bottom: 20px;
+}
+
+#settings .field_select>div:nth-child(1) {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  z-index: 24;
+  width: 100%;
+  text-align: left;
+}
+
+#settings h3{
+  display: inline;
+  padding: 10px 20px;
+  background-color: #121212;
+  border-radius: 20px;
+}
+
+#settings .field_select {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+/* #settings .field_select .header .radio input:nth-child(1){
+  width: 40px;
+  height: 40px;
+  padding: 0;
+
+  appearance: none;
+
+  margin: 6px;
+  transition: all 0.1s linear;
+  background-color: #000000;
+  background-image: url(img/grid.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 6px solid #2e2e2e;
+  border-radius: 10px;
+  outline: 6px solid rgba(40, 100, 200, 0);
+  outline-offset: 3px;
+  color: #f0f0f0;
+  cursor: pointer;
+}
+
+#settings .field_select .header .radio input:nth-child(2){
+  width: 40px;
+  height: 40px;
+  padding: 0;
+
+  appearance: none;
+
+  margin: 6px;
+  transition: all 0.1s linear;
+  background-color: #000000;
+  background-image: url(img/row.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 6px solid #2e2e2e;
+  border-radius: 10px;
+  outline: 6px solid rgba(40, 100, 200, 0);
+  outline-offset: 3px;
+  color: #f0f0f0;
+  cursor: pointer;
+} */
+
+#settings .slot_field{
+  transition: max-height 1s linear;
+  max-height: fit-content;
+  overflow: clip;
+  /* overflow-clip-margin: content-box; */
+  /* overflow-clip-margin: -30px; */
+  padding: 30px;
+  background-color: #000000;
+  border-radius: 10px;
+  max-width: 520px;
+  /* overflow-y: hidden;
+  overflow-x: auto; */
+  width: fit-content;
+  margin-bottom: 20px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
+  flex-wrap: wrap;
+}
+
+#settings .slot{
+  margin: 6px;
+  width: 80px;
+  height: 80px;
+  border: none;
+  border-radius: 20px;
+  background-color: #ffffff;
+  background-size: 400%;
+  background-position: center;
+  padding: 0;
+  outline: 6px solid rgba(40, 100, 200, 0);
+  outline-offset: 3px;
+  transition: all 0.1s linear;
+  flex-grow: 0;
+  flex-basis: auto;
+  appearance: none;
+  cursor: pointer;
+}
+
+#settings .slot:hover{
+  background-size: 200%;
+}
+
+#settings .slot:checked{
+  outline: 6px solid rgba(40, 100, 200, 0.6);
+}
+
+#settings .field_select .OpenCloseDiv {
+  position: relative;
+  margin: 0;
+  margin-top: -40px;
+
+  width: 100px;
+  height: 50px;
+
+  transition: all 0.1s linear;
+  border-radius: 40px;
+
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+
+#settings .field_select .OpenCloseDiv label::after {
+  content: "^";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline;
+  line-height: 50px;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+  transform: rotate(0deg);
+  transition: all 0.2s ease-in-out;
+}
+
+#settings .field_select .OpenCloseDiv input[type="checkbox"]:checked + label::after {
+  transform: rotate(180deg);
+}
+
+#settings .field_select .OpenCloseDiv input[type="checkbox"] {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+
+  appearance: none;
+  transition: all 0.1s linear;
+  border-radius: 40px;
+  background-color: #000000;
+  border: 6px solid #2e2e2e;
+  outline: 3px solid #000000;
+  color: #f0f0f0;
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+
+#settings .field_select .OpenCloseDiv input[type="checkbox"]:hover {
+  background-color: #1a1a1a;
+}
+
+#settings .footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#settings button {
+  margin: 10px;
+  width: calc(50% - 20px);
+  max-width: 100%;
+  min-width: fit-content;
+  display: block;
+  transition: all 0.1s linear;
+  padding: 20px 60px;
+  border-radius: 40px;
+  background-color: #000000;
+  border: 6px solid #2e2e2e;
+  outline: 3px solid #000000;
+  color: #f0f0f0;
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  flex-grow: 1;
+  flex-basis: calc(50% - 20px);
+}
+
+#settings button:hover {
+  background-color: #1a1a1a;
+}
+
+#attension_standart{
+  display: none;
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  color: #e0e0e0;
+  width: 100%;
+  height: 100%;
+}
+
+#attension_standart h2{
+  margin-bottom: 20px;
+}
+
+#attension_standart button{
+  color: #e0e0e0;
+  background-color: #1e1e1e;
+  font-size: 16px;
+  border: none;
+  border-radius: 20px;
+  padding: 20px 60px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#attension_standart button:hover{
+  background-color: #4c4c4c;
+}
+
+#attension_question{
+  display: none;
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  color: #e0e0e0;
+  width: 100%;
+  height: 100%;
+}
+
+#attension_question h2{
+  margin-bottom: 20px;
+}
+
+#attension_question .buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#attension_question button{
+  margin: 10px;
+  flex-basis: 0;
+  flex-grow: 1;
+  width: 50%;
+  min-width: fit-content;
+  height: fit-content;
+  color: #e0e0e0;
+  background-color: #1e1e1e;
+  font-size: 16px;
+  border: none;
+  border-radius: 20px;
+  padding: 20px 60px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#attension_question button:hover{
+  background-color: #4c4c4c;
+}
+
+#edit_icon_scale_position {
+  color: #e0e0e0;
+  width: 100%;
+  /* height: 100%; */
+
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+
+body .chess_section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+body .chess_section aside {
+  font-size: 24px;
+  height: 100%;
+  color: #e0e0e0;
+  background-color: #121212;
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 100%;
+
+  border: 6px solid #353535;
+  outline: 3px solid #121212;
+}
+
+body .chess_section aside .profile {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+body .chess_section aside .profile>div:nth-child(1){
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+body .chess_section aside .profile .profile_icon{
+  width: calc(5vmin + 3vmax);
+  height: calc(5vmin + 3vmax);
+  margin: 20px;
+  position: relative;
+}
+
+body .chess_section aside .profile .profile_icon .icon {
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  border: 3px solid #121212;
+  outline: 6px solid #353535;
+  /* outline-offset: 6px; */
+  background-image: url(img/mj.jpg);
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+body .chess_section aside .profile .profile_icon .icon .fade {
+  border-radius: inherit;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-color: #232323ba;
+  background-image: url(img/pen.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  transition: all 0.2s ease-in-out;
+  opacity: 0;
+}
+
+body .chess_section aside .profile .profile_icon .icon:hover .fade {
+  opacity: 1;
+}
+
+body .chess_section aside .profile .profile_icon .elo{
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 12px;
+  border-radius: 100px;
+  background-color: #378d3e;
+  padding: 5px 10px;
+}
+
+body .chess_section aside .profile .name {
+  padding-bottom: 10px;
+}
+body .chess_section aside .profile .about {
+  padding-bottom: 10px;
+}
+
+/* body .chess_section aside .profile .icon:hover::after {
+   transform: translate(10px);
+} */
+
+/* body .chess_section aside .profile>div {
+  min-width: calc(100% - 140px);
+  text-align: left;
+  margin-bottom: 20px;
+  overflow: clip;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  flex-grow: 1;
+  flex-basis: 140px;
+} */
+
+/* body .chess_section aside .profile .bio {
+  min-width: calc(100% - 140px);
+  text-align: left;
+  margin-bottom: 20px;
+  overflow: clip;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  flex-grow: 1;
+  flex-basis: 140px;
+}
+
+body .chess_section aside .profile .bio .name {
+  font-size: 32px;
+  white-space: nowrap;
+} */
+
+/* body .chess_section aside .profile .bio .elo{
+  font-size: 12px;
+  color: #868686;
+  white-space: nowrap;
+  margin-left: 10px;
+} */
+
+body .chess_section aside .profile .about {
+  font-size: 16px;
+  color: #b6b6b6;
+}
+
+body .chess_section aside ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+body .chess_section aside ul li {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+body .chess_section aside ul button {
+  white-space: nowrap;
+  width: 100%;
+  display: block;
+  transition: all 0.1s linear;
+  padding: 20px 60px;
+  border-radius: 20px;
+  background-color: #1e1e1e;
+  border: none;
+  color: #f0f0f0;
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+body .chess_section aside ul button:hover {
+  background-color: #4c4c4c;
+  color: #f0f0f0;
+}
+
+body .chess_section aside ul .scrollHistoryButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+body .chess_section aside ul .scrollHistoryButtons button{
+  width: calc(50% - 5px);
+}
+
+body .chess_section section {
+  margin-left: 20px;
+  margin-right: 20px;
+  height: 100%;
+  background-color: #121212;
+  border-radius: 20px;
+  padding: 20px;
+
+  border: 6px solid #353535;
+  outline: 3px solid #121212;
+}
+
+/* body .chess_section .stripe_behind {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 70%;
+  background-image: url(img/stripes.png);
+  margin-top: 7.5%;
+} */
+
+#chess_field {
+  /* animation: 1s chess-field-appear-animation ease-in-out; */
+  font-family: 'Butler', serif;
+  position: relative;
+  background-image: url(img/field10.png);
+  height: calc(100vmin - 100px);
+  width: calc(100vmin - 100px);
+  min-width: 400px;
+  min-height: 400px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border-radius: 20px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#chess_field .place {
+  position: relative;
+  caret-color: transparent;
+  height: calc((100vmin - 100px) / 8);
+  width: calc((100vmin - 100px) / 8);
+  min-width: 50px;
+  min-height: 50px;
+  background-color: #ffffff00;
+  background-size: contain;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+  z-index: 3;
+}
+
+#chess_field .place:hover {
+  /* background-image: url(img/placeHOVER.png); */
+  background-color: rgba(0, 162, 255, 0.2);
+}
+
+#chess_field #select {
+  display: none;
+  top: 0;
+  left: 0;
+  height: calc((100vmin - 100px) / 8);
+  width: calc((100vmin - 100px) / 8);
+  min-width: 50px;
+  min-height: 50px;
+  position: absolute;
+  border: 2px solid #bce4f1;
+  border-radius: 5%;
+  animation: 0.1s select-animation linear;
+  background-image: linear-gradient(#28b4e9c7, #28b4e994);
+  background-size: contain;
+  background-position: center;
+  pointer-events: none;
+  z-index: 4;
+}
+
+#chess_field #step_pawn {
+  display: none;
+  top: 0;
+  left: 0;
+  height: calc((100vmin - 100px) / 8);
+  width: calc((100vmin - 100px) / 8);
+  min-width: 50px;
+  min-height: 50px;
+  position: absolute;
+  background-image: url(img/stepGradient.png);
+  background-size: contain;
+  background-position: center;
+  pointer-events: none;
+  z-index: 4;
+}
+
+@keyframes chess-field-appear-animation{
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes select-animation{
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes turnBGanim{
+  0% {
+    margin-top: 50%;
+    height: 0;
+    opacity: 0;
+  }
+
+  30% {
+    margin-top: 35%;
+    height: 30%;
+    opacity: 1;
+  }
+
+  70% {
+    margin-top: 35%;
+    height: 30%;
+    opacity: 1;
+  }
+
+  100% {
+    margin-top: 50%;
+    opacity: 0;
+  }
+}
+
+@keyframes upToRight{
+  0% {
+    transform: translate(0, -50px);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translate(0, 0px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(50px, 0px);
+    opacity: 0;
+  }
+}
+
+@keyframes upToLeft{
+  0% {
+    transform: translate(0, -50px);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translate(0, 0px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50px, 0px);
+    opacity: 0;
+  }
+}
+
+#chess_field #turnBGB {
+  animation: 2s turnBGanim ease-in-out;
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+
+  background-color: rgba(0, 132, 255, 0.596);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+#chess_field #turnBGW {
+  animation: 2s turnBGanim ease-in-out;
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+
+  background-color: rgba(0, 132, 255, 0.596);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+#chess_field .turn {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  transform: translate(0, 0);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  text-align: center;
+}
+
+#chess_field .turn h1 {
+  opacity: 0;
+  animation: 2s upToRight ease-in-out;
+  display: none;
+}
+
+#chess_field .turn h4 {
+  opacity: 0;
+  animation: 2s upToLeft ease-in-out;
+  display: none;
+}
+
+#turnB {
+  color: black;
+  /* background-image: url(img/GothicBGW.png); */
+}
+
+#turnW {
+  color: white;
+  /* background-image: url(img/GothicBG.png); */
+}
+
+#chess_field .turn h1 {
+  font-size: 100px;
+  line-height: 90px;
+}
+
+#chess_field .turn h4 {
+  font-size: 30px;
+  line-height: 20px;
+}
+
+#chess_field #darkBG {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #0000007a;
+  z-index: 6;
+
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+#chess_field #darkBG #wheel_white {
+  display: none;
+  width: 80%;
+  height: 80%;
+  background-color: #00000000;
+  z-index: 6;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#chess_field #darkBG #wheel_white button {
+  width: 50%;
+  height: 50%;
+  background-color: #00000000;
+  z-index: 6;
+  border: none;
+  margin: 0;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  transition: all 0.1s linear;
+}
+
+#chess_field #darkBG #wheel_white button:nth-child(1) {
+  background-image: url(img/wheelwq.png);
+}
+
+#chess_field #darkBG #wheel_white button:nth-child(2) {
+  background-image: url(img/wheelwc.png);
+}
+
+#chess_field #darkBG #wheel_white button:nth-child(3) {
+  background-image: url(img/wheelwb.png);
+}
+
+#chess_field #darkBG #wheel_white button:nth-child(4) {
+  background-image: url(img/wheelwn.png);
+}
+
+
+#chess_field #darkBG #wheel_white button:hover {
+  transform: scale(1.05);
+  z-index: 7;
+}
+
+#chess_field #darkBG #wheel_black {
+  display: none;
+  width: 80%;
+  height: 80%;
+  background-color: #00000000;
+  z-index: 6;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#chess_field #darkBG #wheel_black button {
+  width: 50%;
+  height: 50%;
+  background-color: #00000000;
+  z-index: 6;
+  border: none;
+  margin: 0;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  transition: all 0.1s linear;
+}
+
+#chess_field #darkBG #wheel_black button:nth-child(1) {
+  background-image: url(img/wheelbq.png);
+}
+
+#chess_field #darkBG #wheel_black button:nth-child(2) {
+  background-image: url(img/wheelbc.png);
+}
+
+#chess_field #darkBG #wheel_black button:nth-child(3) {
+  background-image: url(img/wheelbb.png);
+}
+
+#chess_field #darkBG #wheel_black button:nth-child(4) {
+  background-image: url(img/wheelbn.png);
+}
+
+
+#chess_field #darkBG #wheel_black button:hover {
+  transform: scale(1.05);
+  z-index: 7;
+}
+
+/* body section #chess_field .sp {
+  background-image: url(img/stepGradient.png);
+}
+
+body section #chess_field .sp:hover {
+  background-image: url(img/stepGradient.png);
+} */
+
+#chess_field .blaze {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-size: contain;
+  z-index: 2;
+
+  border: 0px solid #00000000;
+  transition: all 0.2s ease-in-out;
+}
+
+#chess_field .figure {
+  position: relative;
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-size: contain;
+  z-index: 1;
+}
+
+#chess_field .bp {
+  background-image: url(img/bp.png);
+  transition: transform 0.2s linear;
+}
+
+#chess_field .bp:hover {
+  background-image: url(img/bp.png);
+  /* transform: translate(0px, -5px); */
+}
+
+#chess_field .wp {
+  background-image: url(img/wp.png);
+  transition: transform 0.2s linear;
+}
+
+#chess_field .wp:hover {
+  background-image: url(img/wp.png);
+  /* transform: translate(0px, -5px); */
+}
+
+#chess_field .bk {
+  background-image: url(img/bk.png);
+  transition: transform 0.2s linear;
+}
+
+#chess_field .bk:hover {
+  background-image: url(img/bk.png);
+  /* transform: translate(0px, -5px); */
+}
+
+#chess_field .wk {
+  background-image: url(img/wk.png);
+  transition: transform 0.2s linear;
+}
+
+#chess_field .wk:hover {
+  background-image: url(img/wk.png);
+  /* transform: translate(0px, -5px); */
+}
+
+#chess_field .bq {
+  background-image: url(img/bq.png);
+  transition: transform 0.2s linear;
+}
+
+#chess_field .bq:hover {
+  background-image: url(img/bq.png);
+  /* transform: translate(0px, -5px); */
+}
+
+#chess_field .wq {
+  background-image: url(img/wq.png);
+  transition: transform 0.2s linear;
+}
+
+#chess_field .wq:hover {
+  background-image: url(img/wq.png);
+  /* transform: translate(0px, -5px); */
+}
+
+#chess_field .bb {
+  background-image: url(img/bb.png);
+  transition: transform 0.2s linear;
+}
+
+#chess_field .bb:hover {
+  background-image: url(img/bb.png);
+  /* transform: translate(0px, -5px); */
+}
+
+#chess_field .wb {
+  background-image: url(img/wb.png);
+  transition: transform 0.2s linear;
+}
+
+#chess_field .wb:hover {
+  background-image: url(img/wb.png);
+  /* transform: translate(0px, -5px); */
+}
+
+#chess_field .bc {
+  background-image: url(img/bc.png);
+  transition: transform 0.2s linear;
+}
+
+#chess_field .bc:hover {
+  background-image: url(img/bc.png);
+  /* transform: translate(0px, -5px); */
+}
+
+#chess_field .wc {
+  background-image: url(img/wc.png);
+  transition: transform 0.2s linear;
+}
+
+#chess_field .wc:hover {
+  background-image: url(img/wc.png);
+  /* transform: translate(0px, -5px); */
+}
+
+#chess_field .bn {
+  background-image: url(img/bn.png);
+  transition: transform 0.2s linear;
+}
+
+#chess_field .bn:hover {
+  background-image: url(img/bn.png);
+  /* transform: translate(0px, -5px); */
+}
+
+#chess_field .wn {
+  background-image: url(img/wn.png);
+  transition: transform 0.2s linear;
+}
+
+#chess_field .wn:hover {
+  background-image: url(img/wn.png);
+  /* transform: translate(0px, -5px); */
+}
+
+.dark-mode {
+  background-color: #2a2a2a;
+  color: #e3e3e3;
+}
+.dark-mode .dark_theme {
+  background-color: #2a2a2a;
+}
+.dark-mode aside {
+  background-color: #1e1e1e;
+  color: #e3e3e3;
+}
+.dark-mode aside a {
+  color: #e3e3e3;
+}
+.dark-mode aside a:hover {
+  background-color: #3f3f3f;
+}
+.dark-mode section {
+  background-color: #1e1e1e;
+  color: #e3e3e3;
+}
+
+@media screen and (max-width: 900px){
+  body {
+    background-image: url();
+    background-color: #000000;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  body .chess_section {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: auto;
+  }
+
+  body .chess_section section{
+    margin: 0;
+    width: 100%;
+    border: none;
+  }
+
+  body .chess_section aside .profile .profile_icon{
+    width: 10vmax;
+    height: 10vmax;
+  }
+
+  #leftside-bar{
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border: none;
+    max-width: 100vw;
+    width: 100%;
+    margin: 0;
+  }
+
+  #chess_field {
+    width: calc(100vw - 40px);
+    height: calc(100vw - 40px);
+  }
+  #chess_field .place{
+    width: calc((100vw - 40px) / 8);
+    height: calc((100vw - 40px) / 8);
+  }
+  #step_pawn {
+    width: calc((100vw - 40px) / 8);
+    height: calc((100vw - 40px) / 8);
+  }
+}
