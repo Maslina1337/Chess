@@ -14,6 +14,11 @@
   box-sizing: border-box;
   margin: 0;
 }
+
+html {
+  width: 100%;
+}
+
 a {
   text-decoration: none;
   color: #272727;
@@ -722,10 +727,11 @@ body .chess_section {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  justify-content: start;
   flex-wrap: nowrap;
 }
 
-body .chess_section aside {
+#leftside-bar {
   font-size: 24px;
   height: 100%;
   color: #e0e0e0;
@@ -738,7 +744,7 @@ body .chess_section aside {
   outline: 3px solid #121212;
 }
 
-body .chess_section aside .profile {
+#leftside-bar .profile {
   width: 100%;
 
   display: flex;
@@ -748,7 +754,7 @@ body .chess_section aside .profile {
   flex-wrap: nowrap;
 }
 
-body .chess_section aside .profile>div:nth-child(1){
+#leftside-bar .profile>div:nth-child(1){
   width: 100%;
 
   display: flex;
@@ -758,14 +764,14 @@ body .chess_section aside .profile>div:nth-child(1){
   flex-wrap: wrap;
 }
 
-body .chess_section aside .profile .profile_icon{
+#leftside-bar .profile .profile_icon{
   width: calc(5vmin + 3vmax);
   height: calc(5vmin + 3vmax);
   margin: 20px;
   position: relative;
 }
 
-body .chess_section aside .profile .profile_icon .icon {
+#leftside-bar .profile .profile_icon .icon {
   width: 100%;
   height: 100%;
   border-radius: 100px;
@@ -779,7 +785,7 @@ body .chess_section aside .profile .profile_icon .icon {
   padding: 0;
 }
 
-body .chess_section aside .profile .profile_icon .icon .fade {
+#leftside-bar .profile .profile_icon .icon .fade {
   border-radius: inherit;
   top: 0;
   left: 0;
@@ -795,11 +801,11 @@ body .chess_section aside .profile .profile_icon .icon .fade {
   opacity: 0;
 }
 
-body .chess_section aside .profile .profile_icon .icon:hover .fade {
+#leftside-bar .profile .profile_icon .icon:hover .fade {
   opacity: 1;
 }
 
-body .chess_section aside .profile .profile_icon .elo{
+#leftside-bar .profile .profile_icon .elo{
   position: absolute;
   top: -10px;
   right: -10px;
@@ -809,18 +815,18 @@ body .chess_section aside .profile .profile_icon .elo{
   padding: 5px 10px;
 }
 
-body .chess_section aside .profile .name {
+#leftside-bar .profile .name {
   padding-bottom: 10px;
 }
-body .chess_section aside .profile .about {
+#leftside-bar .profile .about {
   padding-bottom: 10px;
 }
 
-/* body .chess_section aside .profile .icon:hover::after {
+/* #leftside-bar .profile .icon:hover::after {
    transform: translate(10px);
 } */
 
-/* body .chess_section aside .profile>div {
+/* #leftside-bar .profile>div {
   min-width: calc(100% - 140px);
   text-align: left;
   margin-bottom: 20px;
@@ -837,7 +843,7 @@ body .chess_section aside .profile .about {
   flex-basis: 140px;
 } */
 
-/* body .chess_section aside .profile .bio {
+/* #leftside-bar .profile .bio {
   min-width: calc(100% - 140px);
   text-align: left;
   margin-bottom: 20px;
@@ -854,34 +860,38 @@ body .chess_section aside .profile .about {
   flex-basis: 140px;
 }
 
-body .chess_section aside .profile .bio .name {
+#leftside-bar .profile .bio .name {
   font-size: 32px;
   white-space: nowrap;
 } */
 
-/* body .chess_section aside .profile .bio .elo{
+/* #leftside-bar .profile .bio .elo{
   font-size: 12px;
   color: #868686;
   white-space: nowrap;
   margin-left: 10px;
 } */
 
-body .chess_section aside .profile .about {
+#leftside-bar .profile .about {
   font-size: 16px;
   color: #b6b6b6;
 }
 
-body .chess_section aside ul {
+#leftside-bar ul:nth-child(3) {
+  display: none;
+}
+
+#leftside-bar ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-body .chess_section aside ul li {
+#leftside-bar ul li {
   width: 100%;
   text-align: center;
   margin-bottom: 10px;
 }
-body .chess_section aside ul button {
+#leftside-bar ul button {
   white-space: nowrap;
   width: 100%;
   display: block;
@@ -895,21 +905,33 @@ body .chess_section aside ul button {
   font-family: 'Montserrat', sans-serif;
   cursor: pointer;
 }
-body .chess_section aside ul button:hover {
+#leftside-bar ul button:hover {
   background-color: #4c4c4c;
   color: #f0f0f0;
 }
 
-body .chess_section aside ul .scrollHistoryButtons {
+#leftside-bar ul .scrollHistoryButtons {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
-body .chess_section aside ul .scrollHistoryButtons button{
-  width: calc(50% - 5px);
+#leftside-bar ul .scrollHistoryButtons button{
+  width: 50%;
+}
+
+#leftside-bar ul .scrollHistoryButtons button:nth-child(1){
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  border-right: 2px solid #121212;
+}
+
+#leftside-bar ul .scrollHistoryButtons button:nth-child(2){
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-left: 2px solid #121212;
 }
 
 body .chess_section section {
@@ -1481,11 +1503,31 @@ body section #chess_field .sp:hover {
     margin: 0;
     width: 100%;
     border: none;
+    padding: 0;
   }
 
-  body .chess_section aside .profile .profile_icon{
+  #leftside-bar .profile .profile_icon{
     width: 10vmax;
     height: 10vmax;
+  }
+
+  #leftside-bar ul:nth-child(2) {
+    display: none;
+  }
+  #leftside-bar ul:nth-child(3) {
+    display: block;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  #leftside-bar ul:nth-child(3) li{
+    width: auto;
+  }
+  #leftside-bar ul:nth-child(3) li button{
+    padding: 20px;
+    width: auto;
   }
 
   #leftside-bar{
@@ -1498,15 +1540,15 @@ body section #chess_field .sp:hover {
   }
 
   #chess_field {
-    width: calc(100vw - 40px);
-    height: calc(100vw - 40px);
+    width: 100vw;
+    height: 100vw;
   }
   #chess_field .place{
-    width: calc((100vw - 40px) / 8);
-    height: calc((100vw - 40px) / 8);
+    width: calc(100vw / 8);
+    height: calc(100vw / 8);
   }
   #step_pawn {
-    width: calc((100vw - 40px) / 8);
-    height: calc((100vw - 40px) / 8);
+    width: calc(100vw / 8);
+    height: calc(100vw / 8);
   }
 }
