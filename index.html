@@ -103,17 +103,26 @@
             <div class="profile">
                 <div>
                     <div class="profile_icon">
-                        <button class="icon" onclick="callProfileEdit(profile1)"><div class="fade"></div></button>
+                        <button class="icon" onclick="callProfileEdit(profile1)"><div class="fade"><i class="bi bi-pencil-square"></i></div></button>
                         <span class="elo"></span>
                     </div>
                     <span class="name"></span>
                 </div>
                 <span class="about"></span>
             </div>
-            <ul>
+            <ul class="button_field">
                 <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i> Настройка</button></li>
                 <li><button onclick="callAttensionQuestion('Вы хотите блинов?', 'Нет, спасибо. У меня на них непереносимая аллергия.', 'Да, с радостью!')">Вызвать QUESTION</button></li>
                 <li><button onclick="callAttensionStandart('Вы попались на кликбейт.')">Вызвать ATTENSION</button></li>
+                <li class="scrollHistoryButtons">
+                    <button><i class="bi bi-caret-left-fill"></i></button>
+                    <button><i class="bi bi-caret-right-fill"></i></button>
+                </li>
+            </ul>
+            <ul class="button_field_mobile">
+                <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i></button></li>
+                <li><button onclick="callAttensionQuestion('Вы хотите блинов?', 'Нет, спасибо. У меня на них непереносимая аллергия.', 'Да, с радостью!')"><i class="bi bi-card-checklist"></i></button></li>
+                <li><button onclick="callAttensionStandart('Вы попались на кликбейт.')"><i class="bi bi-card-text"></i></button></li>
                 <li class="scrollHistoryButtons">
                     <button><i class="bi bi-caret-left-fill"></i></button>
                     <button><i class="bi bi-caret-right-fill"></i></button>
@@ -417,11 +426,42 @@
                 </button>
             </div>
         </section>
-        <aside>
-            <ul>
-                <li><a href="./about.html">Автобиография</a></li>
-                <li><a class="youAreHere">Галлерея</a></li>
-                <li><a href="./mail.html">Отправить</a></li>
+        <aside id="leftside-bar">
+            <!-- <div class="profile">
+                    <button class="icon" onclick="callProfileEdit(profile1)"><div class="fade"></div></button>
+                    <div class="bio">
+                        <span class="name"></span>
+                        <span class="elo"></span>
+                    </div>
+                <p class="about"></p>
+            </div> -->
+            <div class="profile">
+                <div>
+                    <div class="profile_icon">
+                        <button class="icon" onclick="callProfileEdit(profile1)"><div class="fade"></div></button>
+                        <span class="elo"></span>
+                    </div>
+                    <span class="name"></span>
+                </div>
+                <span class="about"></span>
+            </div>
+            <ul class="button_field">
+                <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i> Настройка</button></li>
+                <li><button onclick="callAttensionQuestion('Вы хотите блинов?', 'Нет, спасибо. У меня на них непереносимая аллергия.', 'Да, с радостью!')">Вызвать QUESTION</button></li>
+                <li><button onclick="callAttensionStandart('Вы попались на кликбейт.')">Вызвать ATTENSION</button></li>
+                <li class="scrollHistoryButtons">
+                    <button><i class="bi bi-caret-left-fill"></i></button>
+                    <button><i class="bi bi-caret-right-fill"></i></button>
+                </li>
+            </ul>
+            <ul class="button_field_mobile">
+                <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i></button></li>
+                <li><button onclick="callAttensionQuestion('Вы хотите блинов?', 'Нет, спасибо. У меня на них непереносимая аллергия.', 'Да, с радостью!')"><i class="bi bi-card-checklist"></i></button></li>
+                <li><button onclick="callAttensionStandart('Вы попались на кликбейт.')"><i class="bi bi-card-text"></i></button></li>
+                <li class="scrollHistoryButtons">
+                    <button><i class="bi bi-caret-left-fill"></i></button>
+                    <button><i class="bi bi-caret-right-fill"></i></button>
+                </li>
             </ul>
         </aside>
     </div>
