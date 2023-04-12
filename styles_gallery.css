@@ -115,6 +115,7 @@ body .dark_theme button div {
   justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
+  animation: 0.3s linear opacity-animation;
 }
 
 #attension .window{
@@ -128,6 +129,7 @@ body .dark_theme button div {
   border-radius: 20px;
   border: 6px solid #353535;
   outline: 3px solid #121212;
+  animation: 0.5s cubic-bezier(0.59, 0, 0.27, 1.55) window-appear-animation;
 }
 
 #edit_profile {
@@ -158,9 +160,9 @@ body .dark_theme button div {
 #edit_profile .edit_info .icon_box{
   position: relative;
   margin: 20px;
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
+  width: calc(5vmin + 3vmax);
+  height: calc(5vmin + 3vmax);
+  border-radius: calc(5vmin + 3vmax);
   cursor: pointer;
 }
 
@@ -169,7 +171,7 @@ body .dark_theme button div {
   width: 100%;
   height: 100%;
   padding: 0;
-  border-radius: 50px;
+  border-radius: calc(5vmin + 3vmax);
   border: 3px solid #121212;
   outline: 6px solid #353535;
   /* outline-offset: 6px; */
@@ -193,12 +195,15 @@ body .dark_theme button div {
 
 #edit_profile .edit_info .fade {
   border-radius: inherit;
+  line-height: calc(5vmin + 3vmax);
+  text-align: center;
+  color: #e0e0e0;
+  font-size: calc(32px + 0.5vw);
   top: 0;
   left: 0;
   position: absolute;
   pointer-events: none;
   background-color: #232323ba;
-  background-image: url(img/pen.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -243,7 +248,7 @@ body .dark_theme button div {
 
 #edit_profile .edit_info .name_form .counter{
   width: 100%;
-  min-width: 400px;
+  min-width: 310px;
   position: relative;
   border-radius: 10px;
   margin: 0;
@@ -734,6 +739,8 @@ body .chess_section {
   justify-content: center;
   justify-content: start;
   flex-wrap: wrap;
+
+  gap: 20px;
 }
 
 #leftside-bar {
@@ -743,7 +750,8 @@ body .chess_section {
   background-color: #121212;
   border-radius: 20px;
   padding: 40px 30px;
-  width: fit-content;
+  width: calc((100vw - 100vmin - 32px) / 2);
+  /* min-width: 400px; */
 
   border: 6px solid #353535;
   outline: 3px solid #121212;
@@ -751,7 +759,7 @@ body .chess_section {
 
 #leftside-bar .profile {
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   display: flex;
   flex-direction: column;
@@ -948,8 +956,8 @@ body .chess_section {
 }
 
 body .chess_section section {
-  margin-left: 20px;
-  margin-right: 20px;
+  /* margin-left: 20px;
+  margin-right: 20px; */
   height: 100%;
   background-color: #121212;
   border-radius: 20px;
@@ -1022,7 +1030,7 @@ body .chess_section section {
   position: absolute;
   border: 2px solid #bce4f1;
   border-radius: 5%;
-  animation: 0.1s select-animation linear;
+  animation: 0.1s opacity-animation linear;
   background-image: linear-gradient(#28b4e9c7, #28b4e994);
   background-size: contain;
   background-position: center;
@@ -1046,7 +1054,7 @@ body .chess_section section {
   z-index: 4;
 }
 
-@keyframes chess-field-appear-animation{
+@keyframes window-appear-animation{
   0% {
     opacity: 0;
     transform: scale(0.8);
@@ -1058,7 +1066,7 @@ body .chess_section section {
   }
 }
 
-@keyframes select-animation{
+@keyframes opacity-animation{
   0% {
     opacity: 0;
   }
@@ -1508,9 +1516,11 @@ body section #chess_field .sp:hover {
 
   body .chess_section {
     flex-direction: column;
+    flex-wrap: nowrap;
     gap: 20px;
     width: 100%;
-    height: auto;
+    height: 100vh;
+    max-height: 100vh;
   }
 
   body .chess_section section{
@@ -1521,17 +1531,87 @@ body section #chess_field .sp:hover {
     outline: none;
   }
 
-  #leftside-bar .profile .profile_icon{
+  #attension {
+    padding: 10px;
+  }
+
+  #attension .window{
+    width: 100%;
+    height: 100%;
+    max-height: none;
+  }
+
+  #edit_profile .edit_info {
+    flex-flow: column nowrap;
+    flex-direction: column;
+  }
+
+  #edit_profile .edit_info .icon_box {
     width: 10vmax;
     height: 10vmax;
+  }
+
+  #leftside-bar .profile{
+    height: calc((100vh - 100vw) / 2 - 40px);
+    margin: 0;
+  }
+
+  #leftside-bar .profile .name{
+    font-size: calc(24px + 0.5vw);
+  }
+
+  #leftside-bar .profile .elo{
+    /* top: 20px;
+    right: 20px; */
+  }
+
+  #leftside-bar .profile > div:nth-child(1) {
+    justify-content: start;
+  }
+
+  #leftside-bar .profile .about {
+    display: none;
+  }
+
+  #leftside-bar .profile .profile_icon{
+    height: calc((100vh - 100vw) / 2 - 80px);
+    width: calc((100vh - 100vw) / 2 - 80px);
+    border-radius: 150px;
+    max-height: 150px;
+    max-width: 150px;
+    margin: 0 20px;
+  }
+
+  #leftside-bar .profile .profile_icon .icon .fade {
+    width: 100%;
+    height: 100%;
+    line-height: calc((100vh - 100vw) / 2 - 40px);
+  }
+
+  #edit_profile .edit_info .name_form {
+    flex-grow: 0;
+    flex-basis: 0px;
+    width: 100%;
+  }
+
+  #edit_profile .edit_info .name_input {
+    padding-right: 20px;
+  }
+
+  #edit_profile .edit_info .name_form .counter {
+    min-width: 0px;
+  }
+
+  #edit_profile .edit_info .name_form .counter::after {
+    width: auto;
+    display: none;
   }
 
   #leftside-bar .button_field {
     display: none;
   }
   #leftside-bar .button_field_mobile {
-    display: block;
-    display: flex;
+    /* display: flex; */
     justify-content: space-between;
     flex-grow: 0;
     align-items: center;
@@ -1557,7 +1637,10 @@ body section #chess_field .sp:hover {
     outline: none;
     max-width: 100vw;
     width: 100%;
+    height: calc((100vh - 100vw) / 2 - 20px);
     margin: 0;
+    padding: 10px;
+    gap: 0;
   }
 
   #chess_field {
