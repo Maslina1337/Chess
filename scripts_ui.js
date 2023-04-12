@@ -7,6 +7,8 @@ let profile1 = {
     number: "+375336561591"
 }
 
+default_field = "field10.png";
+
 let fieldsStyles = ["field00.png","field01.png","field02.png","field03.png","field04.png","field05.png","field06.png","field07.png","field08.png","field09.png","field10.png"];
 
 function callAttensionStandart(title) {
@@ -144,6 +146,9 @@ fieldsStyles.map(field => {
     button.className = "slot";
     button.setAttribute("onclick", `changeChessField("${field}")`);
     button.style.backgroundImage = `url(img/${field})`
+    if (field = default_field) {
+        button.checked = true;
+    }
     slot_field.appendChild(button);
 })
 
