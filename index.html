@@ -55,7 +55,7 @@
                         <div class="icon_box">
                             <label for="profile_icon_input" class="icon_label"></label>
                             <input name="profile_icon_input" type="file" class="icon" accept=".png,.jpeg,.gif,.jpg" onchange="iconUpload('icon_box')">
-                            <div class="fade"></div>
+                            <div class="fade"><i class="bi bi-pencil-square"></i></div>
                         </div>
                         <form class="name_form">
                             <label for="name_input">Имя:</label>
@@ -112,8 +112,6 @@
             </div>
             <ul class="button_field">
                 <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i> Настройка</button></li>
-                <li><button onclick="callAttensionQuestion('Вы хотите блинов?', 'Нет, спасибо. У меня на них непереносимая аллергия.', 'Да, с радостью!')">Вызвать QUESTION</button></li>
-                <li><button onclick="callAttensionStandart('Вы попались на кликбейт.')">Вызвать ATTENSION</button></li>
                 <li class="scrollHistoryButtons">
                     <button><i class="bi bi-caret-left-fill"></i></button>
                     <button><i class="bi bi-caret-right-fill"></i></button>
@@ -438,7 +436,7 @@
             <div class="profile">
                 <div>
                     <div class="profile_icon">
-                        <button class="icon" onclick="callProfileEdit(profile1)"><div class="fade"></div></button>
+                        <button class="icon" onclick="callProfileEdit(profile1)"><div class="fade"><i class="bi bi-pencil-square"></i></div></button>
                         <span class="elo"></span>
                     </div>
                     <span class="name"></span>
