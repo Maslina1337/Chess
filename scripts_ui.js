@@ -7,6 +7,15 @@ let profile1 = {
     number: "+375336561591"
 }
 
+let profile2 = {
+    name: "Dog",
+    elo: "999",
+    about: ":):):):):):):):):):):):):):):):):):):):):):):):):):):):):):)",
+    password: "578934563945",
+    mail: "dogCoolDog@gmail.com",
+    number: "+375336561592"
+}
+
 default_field = "field10.png";
 
 let fieldsStyles = ["field00.png","field01.png","field02.png","field03.png","field04.png","field05.png","field06.png","field07.png","field08.png","field09.png","field10.png"];
@@ -74,6 +83,24 @@ function saveProfileChanges(profile) {
     attensionCencel();
 }
 
+function callFigureWheel(turn, y, x) {
+    chessFieldPlaces.map((i) => {
+        i.map((j) => {
+            let Place = window.document.getElementById(j);
+            Place.setAttribute("onclick", "");
+            Place.setAttribute("onmouseover", "");
+            Place.setAttribute("onmouseout", "");
+        })
+    })
+    attensionCencel();
+    let attension = window.document.getElementById("attension");
+    attension.style.display = "flex";
+    let attension_window = attension.getElementsByClassName[0]("window");
+    attension_window.style.borderRadius = "100vmin";
+    let figure_select_wheel = window.document.getElementById("figure_select_wheel");
+    figure_select_wheel.style.display = "flex";
+}
+
 function attensionCencel() {
     window.document.getElementById("attension").style.display = "none";
     window.document.getElementById("attension_standart").style.display = "none";
@@ -82,6 +109,7 @@ function attensionCencel() {
     window.document.getElementById("attension_question").style.display = "none";
     window.document.getElementById("settings").style.display = "none";
     window.document.getElementById("edit_icon_scale_position").style.display = "none";
+    window.document.getElementById("figure_select_wheel").style.display = "none";
 }
 
 function profileInteract(className, value, profile) {
@@ -138,6 +166,107 @@ function iconUpload(inputBox) {
     }
 }
 
+function compliteBeatenFigures(turn) {
+    let beatenFigureField = (turn === "white" ? beatenFiguresBlack_value : beatenFiguresWhite_value);
+    if (beatenFigureField !== null) {
+        if ((turn === "white" ? beatenFiguresBlack.length : beatenFiguresWhite.length) === 1) {
+            beatenFigureField.style.display = "flex";
+            let slot = window.document.createElement("div");
+            slot.classList.add("slot")
+            slot.style.backgroundImage = "url(img/" + (turn === "white" ? beatenFiguresBlack[0] : beatenFiguresWhite[0]) + ".png)"; 
+            beatenFigureField.appendChild(slot);
+        } else {
+            beatenFigureField.style.display = "flex";
+            let slot = window.document.createElement("div");
+            slot.classList.add("slot")
+            slot.style.backgroundImage = "url(img/" + (turn === "white" ? beatenFiguresBlack[beatenFiguresBlack.length - 1] : beatenFiguresWhite[beatenFiguresWhite.length - 1]) + ".png)"; 
+            beatenFigureField.appendChild(slot);
+        }
+    }
+}
+
+function callSpectateWarning() {
+    let spectateModeWarning = window.document.getElementById("spectateModeWarning");
+    spectateModeWarning.style.display = "flex";
+    if (spectateModeWarning.getElementsByTagName("input")[0].checked) {
+        spectateModeWarning.getElementsByTagName("p")[0].style.display = "none";
+    } else {
+        spectateModeWarning.getElementsByTagName("p")[0].style.display = "block";
+    }
+}
+
+function uncallSpectateWarning() {
+    window.document.getElementById("spectateModeWarning").style.display = "none";
+}
+
+function RightClickMenuEventAdd() {
+    figure.map((f) => {                                             //context menu
+        f.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+            callRightClickMenu(test);
+        })
+    });
+}
+
+
+
+
+let test = [{type: "button", title: "call HI", function: "alert('hi')"}, {type: "button", title: "call HO", function: "alert('HO')"}];
+const right_click_menu = window.document.getElementById("right_click_menu");
+let mouse_pos = {
+    x: "",
+    y: ""
+}
+
+function callRightClickMenu(array) {
+    right_click_menu.innerHTML = "";
+    array.map((object) => {
+        if (object.type === "button") {
+            let button = window.document.createElement("button");
+            button.innerHTML = object.title;
+            button.addEventListener("click", (event) => {
+                object.function;
+                alert("it work");
+            })
+            right_click_menu.appendChild(button);
+        }
+    });
+    right_click_menu.style = "";
+    right_click_menu.style.display = "flex";
+    
+    // alert(getComputedStyle(right_click_menu).width);
+    // alert(getComputedStyle(right_click_menu).height);
+    // alert(window.innerWidth);
+    // alert(window.innerHeight);
+    // 
+
+    let isBothSidesAreFull = [false, false];
+
+    if (parseInt(getComputedStyle(right_click_menu).width) + parseInt(mouse_pos.x) > window.innerWidth) {
+        right_click_menu.style.left = parseInt(mouse_pos.x) - parseInt(getComputedStyle(right_click_menu).width) + "px";
+        isBothSidesAreFull[0] = true;
+    } else {
+        right_click_menu.style.left = mouse_pos.x;
+    }
+    
+    if (parseInt(getComputedStyle(right_click_menu).height) + parseInt(mouse_pos.y) > window.innerHeight) {
+        right_click_menu.style.top = parseInt(mouse_pos.y) - parseInt(getComputedStyle(right_click_menu).height) + "px";
+        isBothSidesAreFull[1] = true;
+    } else {
+        right_click_menu.style.top = mouse_pos.y;
+    }
+
+    if (isBothSidesAreFull[0] && isBothSidesAreFull[1]) { //Не пашет
+        right_click_menu.style.borderBottomRightRadius = "0px";
+    } else if (!isBothSidesAreFull[0] && isBothSidesAreFull[1]) {
+        right_click_menu.style.borderBottomLeftRadius = "0px";
+    } else if (isBothSidesAreFull[0] && !isBothSidesAreFull[1]) {
+        right_click_menu.style.borderTopRightRadius = "0px";
+    } else if (!isBothSidesAreFull[0] && !isBothSidesAreFull[1]) {
+        right_click_menu.style.borderTopLeftRadius = "0px";
+    }
+}
+
 let slot_field = window.document.getElementById("settings").getElementsByClassName("field_select")[0].getElementsByClassName("slot_field")[0];
 fieldsStyles.map(field => {
     button = window.document.createElement("input");
@@ -151,6 +280,33 @@ fieldsStyles.map(field => {
     }
     slot_field.appendChild(button);
 })
+
+let beatenFiguresBlack_value = window.document.getElementById("beatenFiguresBlack");
+let beatenFiguresWhite_value = window.document.getElementById("beatenFiguresWhite");
+
+// beatenFiguresBlack_value.style.maxHeight = 0;
+// beatenFiguresBlack_value.style.paddingTop = 0;
+// beatenFiguresBlack_value.style.paddingBottom = 0;
+beatenFiguresBlack_value.style.display = "none";
+
+// beatenFiguresWhite_value.style.maxHeight = 0;
+// beatenFiguresWhite_value.style.paddingTop = 0;
+// beatenFiguresWhite_value.style.paddingBottom = 0;
+beatenFiguresWhite_value.style.display = "none";
+
+window.document.addEventListener("click", (event) => {
+    right_click_menu.style.display = "none";
+    // right_click_menu.style.display = "none";
+});
+    
+window.document.getElementById("right_click_menu").addEventListener("contextmenu", (event) => {
+    event.preventDefault();
+})
+
+window.addEventListener("mousemove", (event) => {
+    mouse_pos.y = String(event.pageY) + "px";
+    mouse_pos.x = String(event.pageX) + "px";
+});
 
 profileInteract(".name", "name", profile1);
 profileInteract(".elo", "elo", profile1);
