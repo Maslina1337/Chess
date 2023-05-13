@@ -18,8 +18,14 @@
     <title>Briginda</title>
 </head>
 <body>
+    <div id="right_click_menu"></div>
+    <div id="dragged_element"></div>
     <div id="attension">
         <div class="window">
+            <div id="figure_select_wheel">
+                <!-- <div class="wheel"></div> -->
+                <div class="arrow"></div>
+            </div>
             <div id="attension_standart">
                 <h2>ATTENSION_NAME</h2>
                 <button onclick="attensionCencel()">O.K.</button>
@@ -62,7 +68,6 @@
                             <label class="counter" string="/20">
                                 <input name="name_input" class="name_input" type="text" placeholder="Введите имя" maxlength="20" oninput="counterText('name_form', 'name_input', 20)">
                             </label>
-                            <!-- <p class="counter"></p> -->
                         </form>
                     </div>
                     <form class="mail_form">
@@ -88,386 +93,398 @@
             </div>
         </div>
     </div>
-    <!-- <div class="glitch_effect"></div> -->
-    <div class="chess_section">
-        <!-- <div class="stripe_behind"></div> -->
-        <aside id="leftside-bar">
-            <!-- <div class="profile">
-                    <button class="icon" onclick="callProfileEdit(profile1)"><div class="fade"></div></button>
-                    <div class="bio">
+        <div class="chess_section">
+            <aside id="leftside-bar">
+                <div class="top_side">
+                    <div class="profile">
+                        <div>
+                            <div class="profile_icon">
+                                <button class="icon" onclick="callProfileEdit(profile1)"><div class="fade"><i class="bi bi-pencil-square"></i></div></button>
+                                <span class="elo"></span>
+                            </div>
+                            <span class="name"></span>
+                        </div>
+                        <span class="about"></span>
+                        <div class="beatenFigures" id="beatenFiguresBlack"></div>
+                    </div>
+                    <ul class="button_field">
+                        <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i> Настройка</button></li>
+                        <li class="scrollHistoryButtons">
+                            <button onclick="showStepBack()"><i class="bi bi-caret-left-fill"></i></button>
+                            <button><i class="bi bi-caret-right-fill"></i></button>
+                        </li>
+                    </ul>
+                    <ul class="button_field_mobile">
+                        <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i></button></li>
+                        <li><button onclick="callAttensionQuestion('Вы хотите блинов?', 'Нет, спасибо. У меня на них непереносимая аллергия.', 'Да, с радостью!')"><i class="bi bi-card-checklist"></i></button></li>
+                        <li><button onclick="callAttensionStandart('Вы попались на кликбейт.')"><i class="bi bi-card-text"></i></button></li>
+                        <li class="scrollHistoryButtons">
+                            <button onclick="showStepBack()"><i class="bi bi-caret-left-fill"></i></button>
+                            <button><i class="bi bi-caret-right-fill"></i></button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bottom_side">
+                    <div class="headline">
+                        <span>Оппонент</span>
+                    </div>
+                    <div class="profile">
+                        <div>
+                            <div class="profile_icon">
+                                <button class="icon" onclick="callProfileEdit(profile1)"><div class="fade"><i class="bi bi-pencil-square"></i></div></button>
+                                <span class="elo"></span>
+                            </div>
+                            <span class="name"></span>
+                        </div>
+                        <span class="about"></span>
+                        <div class="beatenFigures" id="beatenFiguresWhite"></div>
+                    </div>
+                </div>
+            </aside>
+            <section>
+                <div id="spectateModeWarning">
+                    <input type="checkbox" onchange="callSpectateWarning()" checked>
+                    <i class="bi bi-exclamation-triangle"></i>
+                    <p> Вы находитесь в режиме просмотра истории.</p>
+                </div>
+                <div id="chess_field">
+                    <div id="darkBG">
+                        <div id="wheel_white">
+                            <button></button>
+                            <button></button>
+                            <button></button>
+                            <button></button>
+                        </div>
+                        <div id="wheel_black">
+                            <button></button>
+                            <button></button>
+                            <button></button>
+                            <button></button>
+                        </div>
+                    </div>
+                        <div class="turn" id="turnB">
+                            <h1>&#9873;</h1>
+                        </div>
+                        <div class="turn" id="turnW">
+                            <h1>&#9873;</h1>
+                        </div>
+                    <div id="selection"></div>
+                    <div id="select"></div>
+                    <div id="step_pawn"></div>
+        
+                    <button class="place" id="place11">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place12">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place13">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place14">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place15">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place16">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place17">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place18">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+        
+                    <button class="place" id="place21">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place22">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place23">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place24">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place25">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place26">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place27">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place28">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+        
+                    <button class="place" id="place31">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place32">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place33">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place34">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place35">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place36">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place37">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place38">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+        
+                    <button class="place" id="place41">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place42">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place43">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place44">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place45">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place46">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place47">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place48">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+        
+                    <button class="place" id="place51">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place52">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place53">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place54">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place55">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place56">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place57">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place58">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+        
+                    <button class="place" id="place61">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place62">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place63">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place64">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place65">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place66">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place67">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place68">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+        
+                    <button class="place" id="place71">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place72">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place73">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place74">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place75">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place76">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place77">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place78">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+        
+                    <button class="place" id="place81">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place82">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place83">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place84">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place85">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place86">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place87">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                    <button class="place" id="place88">
+                        <!-- <div class="figure" id=""></div> -->
+                        <div class="blaze"></div>
+                    </button>
+                </div>
+            </section>
+            <aside id="leftside-bar">
+                <!-- <div class="profile">
+                        <button class="icon" onclick="callProfileEdit(profile1)"><div class="fade"></div></button>
+                        <div class="bio">
+                            <span class="name"></span>
+                            <span class="elo"></span>
+                        </div>
+                    <p class="about"></p>
+                </div> -->
+                <!-- <div class="profile">
+                    <div>
+                        <div class="profile_icon">
+                            <button class="icon" onclick="callProfileEdit(profile1)"><div class="fade"><i class="bi bi-pencil-square"></i></div></button>
+                            <span class="elo"></span>
+                        </div>
                         <span class="name"></span>
-                        <span class="elo"></span>
                     </div>
-                <p class="about"></p>
-            </div> -->
-            <div class="profile">
-                <div>
-                    <div class="profile_icon">
-                        <button class="icon" onclick="callProfileEdit(profile1)"><div class="fade"><i class="bi bi-pencil-square"></i></div></button>
-                        <span class="elo"></span>
-                    </div>
-                    <span class="name"></span>
+                    <span class="about"></span>
                 </div>
-                <span class="about"></span>
-            </div>
-            <ul class="button_field">
-                <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i> Настройка</button></li>
-                <li class="scrollHistoryButtons">
-                    <button><i class="bi bi-caret-left-fill"></i></button>
-                    <button><i class="bi bi-caret-right-fill"></i></button>
-                </li>
-            </ul>
-            <ul class="button_field_mobile">
-                <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i></button></li>
-                <li><button onclick="callAttensionQuestion('Вы хотите блинов?', 'Нет, спасибо. У меня на них непереносимая аллергия.', 'Да, с радостью!')"><i class="bi bi-card-checklist"></i></button></li>
-                <li><button onclick="callAttensionStandart('Вы попались на кликбейт.')"><i class="bi bi-card-text"></i></button></li>
-                <li class="scrollHistoryButtons">
-                    <button><i class="bi bi-caret-left-fill"></i></button>
-                    <button><i class="bi bi-caret-right-fill"></i></button>
-                </li>
-            </ul>
-        </aside>
-        <section>
-            <div id="chess_field">
-                <div id="darkBG">
-                    <div id="wheel_white">
-                        <button></button>
-                        <button></button>
-                        <button></button>
-                        <button></button>
-                    </div>
-                    <div id="wheel_black">
-                        <button></button>
-                        <button></button>
-                        <button></button>
-                        <button></button>
-                    </div>
-                </div>
-                <div id="turnBGB">
-                    <div class="turn" id="turnB">
-                        <h4>TURN</h4>
-                        <h1>BLACK</h1>
-                    </div>
-                </div>
-                <div id="turnBGW">
-                    <div class="turn" id="turnW">
-                        <h4>TURN</h4>
-                        <h1>WHITE</h1>
-                    </div>
-                </div>
-                <div id="selection"></div>
-                <div id="select"></div>
-                <div id="step_pawn"></div>
+                <ul class="button_field">
+                    <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i> Настройка</button></li>
+                    <li><button onclick="callAttensionQuestion('Вы хотите блинов?', 'Нет, спасибо. У меня на них непереносимая аллергия.', 'Да, с радостью!')">Вызвать QUESTION</button></li>
+                    <li><button onclick="callAttensionStandart('Вы попались на кликбейт.')">Вызвать ATTENSION</button></li>
+                    <li class="scrollHistoryButtons">
+                        <button><i class="bi bi-caret-left-fill"></i></button>
+                        <button><i class="bi bi-caret-right-fill"></i></button>
+                    </li>
+                </ul>
+                <ul class="button_field_mobile">
+                    <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i></button></li>
+                    <li><button onclick="callAttensionQuestion('Вы хотите блинов?', 'Нет, спасибо. У меня на них непереносимая аллергия.', 'Да, с радостью!')"><i class="bi bi-card-checklist"></i></button></li>
+                    <li><button onclick="callAttensionStandart('Вы попались на кликбейт.')"><i class="bi bi-card-text"></i></button></li>
+                    <li class="scrollHistoryButtons">
+                        <button><i class="bi bi-caret-left-fill"></i></button>
+                        <button><i class="bi bi-caret-right-fill"></i></button>
+                    </li>
+                </ul> -->
+            </aside>
+        </div>
     
-                <button class="place" id="place11">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place12">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place13">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place14">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place15">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place16">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place17">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place18">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-    
-                <button class="place" id="place21">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place22">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place23">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place24">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place25">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place26">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place27">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place28">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-    
-                <button class="place" id="place31">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place32">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place33">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place34">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place35">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place36">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place37">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place38">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-    
-                <button class="place" id="place41">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place42">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place43">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place44">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place45">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place46">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place47">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place48">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-    
-                <button class="place" id="place51">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place52">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place53">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place54">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place55">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place56">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place57">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place58">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-    
-                <button class="place" id="place61">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place62">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place63">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place64">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place65">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place66">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place67">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place68">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-    
-                <button class="place" id="place71">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place72">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place73">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place74">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place75">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place76">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place77">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place78">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-    
-                <button class="place" id="place81">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place82">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place83">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place84">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place85">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place86">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place87">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-                <button class="place" id="place88">
-                    <!-- <div class="figure" id=""></div> -->
-                    <div class="blaze"></div>
-                </button>
-            </div>
-        </section>
-        <aside id="leftside-bar">
-            <!-- <div class="profile">
-                    <button class="icon" onclick="callProfileEdit(profile1)"><div class="fade"></div></button>
-                    <div class="bio">
-                        <span class="name"></span>
-                        <span class="elo"></span>
-                    </div>
-                <p class="about"></p>
-            </div> -->
-            <div class="profile">
-                <div>
-                    <div class="profile_icon">
-                        <button class="icon" onclick="callProfileEdit(profile1)"><div class="fade"><i class="bi bi-pencil-square"></i></div></button>
-                        <span class="elo"></span>
-                    </div>
-                    <span class="name"></span>
-                </div>
-                <span class="about"></span>
-            </div>
-            <ul class="button_field">
-                <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i> Настройка</button></li>
-                <li><button onclick="callAttensionQuestion('Вы хотите блинов?', 'Нет, спасибо. У меня на них непереносимая аллергия.', 'Да, с радостью!')">Вызвать QUESTION</button></li>
-                <li><button onclick="callAttensionStandart('Вы попались на кликбейт.')">Вызвать ATTENSION</button></li>
-                <li class="scrollHistoryButtons">
-                    <button><i class="bi bi-caret-left-fill"></i></button>
-                    <button><i class="bi bi-caret-right-fill"></i></button>
-                </li>
-            </ul>
-            <ul class="button_field_mobile">
-                <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i></button></li>
-                <li><button onclick="callAttensionQuestion('Вы хотите блинов?', 'Нет, спасибо. У меня на них непереносимая аллергия.', 'Да, с радостью!')"><i class="bi bi-card-checklist"></i></button></li>
-                <li><button onclick="callAttensionStandart('Вы попались на кликбейт.')"><i class="bi bi-card-text"></i></button></li>
-                <li class="scrollHistoryButtons">
-                    <button><i class="bi bi-caret-left-fill"></i></button>
-                    <button><i class="bi bi-caret-right-fill"></i></button>
-                </li>
-            </ul>
-        </aside>
-    </div>
     <!-- <div class="dark_theme">
         <span>Потемнее ? </span><button onclick="switchToDark()" id="darkButton"><div id="buttonCircle"></div></button>
     </div> -->
     <script defer src="dark_theme.js"></script>
+    <script src="chess_logic.js"></script>
+    <script defer src="chess_ui.js"></script>
     <script defer src="scripts_ui.js"></script>
+    <script defer src="dragAndDropPieces.js"></script>
     <script defer src="chess.js"></script>
 </body>
 </html>
