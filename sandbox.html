@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="styles_gallery.css" rel="stylesheet">
+    <link href="styles_sandbox.css" rel="stylesheet">
 
-    <link rel="prefetch" href="img/bcSwitch.png" />
+    <!-- <link rel="prefetch" href="img/bcSwitch.png" /> -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,8 +23,17 @@
     <div id="attension">
         <div class="window">
             <div id="figure_select_wheel">
-                <!-- <div class="wheel"></div> -->
-                <div class="arrow"></div>
+                <img src="img/piecePickArrow.png" alt="arrow" id="arrow"></img>
+                <div class="gears">
+                    <img src="img/Gear.png" alt="gear" id="gear1">
+                    <img src="img/Gear.png" alt="gear" id="gear2">
+                </div>
+                <div class="pieces">
+                    <button class="up-left-slot slot"></button>
+                    <button class="up-right-slot slot"></button>
+                    <button class="down-left-slot slot"></button>
+                    <button class="down-right-slot slot"></button>
+                </div>
             </div>
             <div id="attension_standart">
                 <h2>ATTENSION_NAME</h2>
@@ -93,6 +102,14 @@
             </div>
         </div>
     </div>
+    <header>
+        <img src="img/cheess-logo-white.png" class="logo"></img>
+        <ul class="navigator">
+            <li><a href="#">Bot</a></li>
+            <li><a href="#">Multiplayer</a></li>
+            <li><a href="#">Sandbox</a></li>
+        </ul>
+    </header>
         <div class="chess_section">
             <aside id="leftside-bar">
                 <div class="top_side">
@@ -108,7 +125,7 @@
                         <div class="beatenFigures" id="beatenFiguresBlack"></div>
                     </div>
                     <ul class="button_field">
-                        <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i> Настройка</button></li>
+                        <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i></button></li>
                         <li class="scrollHistoryButtons">
                             <button onclick="showStepBack()"><i class="bi bi-caret-left-fill"></i></button>
                             <button><i class="bi bi-caret-right-fill"></i></button>
@@ -143,7 +160,7 @@
             </aside>
             <section>
                 <div id="spectateModeWarning">
-                    <input type="checkbox" onchange="callSpectateWarning()" checked>
+                    <input name="historyEnterWarning" type="checkbox" onchange="callSpectateWarning()" checked>
                     <i class="bi bi-exclamation-triangle"></i>
                     <p> Вы находитесь в режиме просмотра истории.</p>
                 </div>
@@ -168,8 +185,8 @@
                         <div class="turn" id="turnW">
                             <h1>&#9873;</h1>
                         </div>
-                    <div id="selection"></div>
-                    <div id="select"></div>
+                    <!-- <div id="selection"></div>
+                    <div id="select"></div> -->
                     <div id="step_pawn"></div>
         
                     <button class="place" id="place11">
@@ -437,49 +454,26 @@
                     </button>
                 </div>
             </section>
-            <aside id="leftside-bar">
-                <!-- <div class="profile">
-                        <button class="icon" onclick="callProfileEdit(profile1)"><div class="fade"></div></button>
-                        <div class="bio">
-                            <span class="name"></span>
-                            <span class="elo"></span>
-                        </div>
-                    <p class="about"></p>
-                </div> -->
-                <!-- <div class="profile">
-                    <div>
-                        <div class="profile_icon">
-                            <button class="icon" onclick="callProfileEdit(profile1)"><div class="fade"><i class="bi bi-pencil-square"></i></div></button>
-                            <span class="elo"></span>
-                        </div>
-                        <span class="name"></span>
+            <aside id="rightside-bar">
+                <div class="sandbox-menu">
+                    <h2>Меню песочницы</h2>
+                    <div class="summon-piece-slot-field">
+                        <div class="bk slot"></div>
+                        <div class="bq slot"></div>
+                        <div class="bn slot"></div>
+                        <div class="bb slot"></div>
+                        <div class="bc slot"></div>
+                        <div class="bp slot"></div>
+                        <div class="wk slot"></div>
+                        <div class="wq slot"></div>
+                        <div class="wn slot"></div>
+                        <div class="wb slot"></div>
+                        <div class="wc slot"></div>
+                        <div class="wp slot"></div>
                     </div>
-                    <span class="about"></span>
                 </div>
-                <ul class="button_field">
-                    <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i> Настройка</button></li>
-                    <li><button onclick="callAttensionQuestion('Вы хотите блинов?', 'Нет, спасибо. У меня на них непереносимая аллергия.', 'Да, с радостью!')">Вызвать QUESTION</button></li>
-                    <li><button onclick="callAttensionStandart('Вы попались на кликбейт.')">Вызвать ATTENSION</button></li>
-                    <li class="scrollHistoryButtons">
-                        <button><i class="bi bi-caret-left-fill"></i></button>
-                        <button><i class="bi bi-caret-right-fill"></i></button>
-                    </li>
-                </ul>
-                <ul class="button_field_mobile">
-                    <li><button onclick="callSettings()"><i class="bi bi-gear-fill"></i></button></li>
-                    <li><button onclick="callAttensionQuestion('Вы хотите блинов?', 'Нет, спасибо. У меня на них непереносимая аллергия.', 'Да, с радостью!')"><i class="bi bi-card-checklist"></i></button></li>
-                    <li><button onclick="callAttensionStandart('Вы попались на кликбейт.')"><i class="bi bi-card-text"></i></button></li>
-                    <li class="scrollHistoryButtons">
-                        <button><i class="bi bi-caret-left-fill"></i></button>
-                        <button><i class="bi bi-caret-right-fill"></i></button>
-                    </li>
-                </ul> -->
             </aside>
         </div>
-    
-    <!-- <div class="dark_theme">
-        <span>Потемнее ? </span><button onclick="switchToDark()" id="darkButton"><div id="buttonCircle"></div></button>
-    </div> -->
     <script defer src="dark_theme.js"></script>
     <script src="chess_logic.js"></script>
     <script defer src="chess_ui.js"></script>
