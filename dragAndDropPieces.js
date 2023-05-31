@@ -16,6 +16,7 @@ function dragstartEvent(event) {
         // smartSelectInfo.y = parseInt(dragged_figure.parentElement.id[5]) - 1;
         // smartSelectInfo.x = parseInt(dragged_figure.parentElement.id[6]) - 1;
     }
+    window.addEventListener("mouseup", dropFigure);
     window.addEventListener("mousemove", movemouseWithFigureFirstMove);
 }
 
@@ -25,12 +26,19 @@ function dragstartEvent(event) {
 function movemouseWithFigureFirstMove(event) {
     window.removeEventListener("mousemove", movemouseWithFigureFirstMove);
     window.addEventListener("mousemove", connectPieceWithPointer);
-    console.log(dragged_figure);
     dragged_figure.style.visibility = "hidden";
     let dragged_element = window.document.getElementById("dragged_element");
     dragged_element.style.backgroundImage = getComputedStyle(dragged_figure).backgroundImage;
     dragged_element.style.top = String(parseInt(mouse_pos.y) - parseInt(getComputedStyle(dragged_element).height) / 2) + "px";
     dragged_element.style.left = String(parseInt(mouse_pos.x) - parseInt(getComputedStyle(dragged_element).width) / 2) + "px";
+
+    userRights.canShowPossiableMoves = false;
+    userRights.canClearPossiableMoves = false;
+
+    let acheaveSize = "calc((100vmin - 92px - " + String(parseInt(getHeaderHeight())) + "px) / 8)";
+    dragged_element.style.height = acheaveSize;
+    dragged_element.style.width = acheaveSize;
+
     dragged_element.style.visibility = "visible";
     selectFigureDrag(dragged_figure.parentElement.id[5] - 1, dragged_figure.parentElement.id[6] - 1);
 }
@@ -41,29 +49,17 @@ function connectPieceWithPointer(event) {
     dragged_element.style.left = String(parseInt(mouse_pos.x) - parseInt(getComputedStyle(dragged_element).width) / 2) + "px";
 }
 
-let dragged_figure;
-
-//isAfter
-
-let place_drop = window.document.querySelectorAll(".place");
-    place_drop = Array.from(place_drop);
-    place_drop.map((pd) => {
-        pd.addEventListener('mouseover', (event) => {
-            if (Object.values(event.target.classList).indexOf("place") !== -1) {
-                mouseOverPlace = [parseInt(event.target.id[5]) - 1, parseInt(event.target.id[6]) - 1];
-            } else {
-                mouseOverPlace = [parseInt(event.target.parentElement.id[5]) - 1, parseInt(event.target.parentElement.id[6]) - 1];
-            }
-        });
-    });
-
-window.addEventListener('mouseup', (event) => {
+function dropFigure(event) {
     if (dragged_figure !== undefined) {
         window.removeEventListener("mousemove", movemouseWithFigureFirstMove);
         window.removeEventListener("mousemove", connectPieceWithPointer);
         let dragged_element = window.document.getElementById("dragged_element");
-        console.log(dragged_figure);
         dragged_element.style.visibility = "hidden";
+        
+
+        userRights.canShowPossiableMoves = true;
+        userRights.canClearPossiableMoves = true;
+
         dragged_figure.style.visibility = "visible";
         if (mouseOverPlace !== 0) {
             if (selectedFigure.length !== 0) {
@@ -75,9 +71,24 @@ window.addEventListener('mouseup', (event) => {
             clearPossibleMoves();
         } else {
             clearPossibleMoves();
-            showPossibleMoves(mouseOverPlace[0], mouseOverPlace[1]);
+            if (!userRights.canPickPiece) {
+                showPossibleMoves(mouseOverPlace[0], mouseOverPlace[1]);
+            }
         }
-        debugger;
         dragged_figure = undefined;
     }
+}
+
+let dragged_figure;
+
+let place_drop = window.document.querySelectorAll(".place");
+place_drop = Array.from(place_drop);
+place_drop.map((pd) => {
+    pd.addEventListener('mouseover', (event) => {
+        if (Object.values(event.target.classList).indexOf("place") !== -1) {
+            mouseOverPlace = [parseInt(event.target.id[5]) - 1, parseInt(event.target.id[6]) - 1];
+        } else {
+            mouseOverPlace = [parseInt(event.target.parentElement.id[5]) - 1, parseInt(event.target.parentElement.id[6]) - 1];
+        }
+    });
 });
