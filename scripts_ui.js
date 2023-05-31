@@ -16,9 +16,32 @@ let profile2 = {
     number: "+375336561592"
 }
 
+let windowSize = [0, 0];
+
 default_field = "field10.png";
 
 let fieldsStyles = ["field00.png","field01.png","field02.png","field03.png","field04.png","field05.png","field06.png","field07.png","field08.png","field09.png","field10.png"];
+
+let pick_piece_arrow = window.document.getElementById("arrow");
+let pick_piece_gear1 = window.document.getElementById("gear1");
+let pick_piece_gear2 = window.document.getElementById("gear2");
+
+// function getWindowSize() {
+//     windowSize[0] = getComputedStyle(window).width;
+//     windowSize[1] = getComputedStyle(window).height;
+// }
+
+function setSizeChessSection() {
+    let chess_field = window.document.querySelector("#chess_field");
+    // let acheaveSize = String(parseInt(getComputedStyle(chess_field).height) - parseInt(getHeaderHeight())) + "px";
+    let acheaveSize = "calc(100vmin - 92px - " + String(parseInt(getHeaderHeight())) + "px)";
+    chess_field.style.height = acheaveSize;
+    chess_field.style.width = acheaveSize;
+}
+
+function getHeaderHeight() {
+    return getComputedStyle(window.document.querySelector("header")).height;
+}
 
 function callAttensionStandart(title) {
     attensionCencel();
@@ -83,22 +106,91 @@ function saveProfileChanges(profile) {
     attensionCencel();
 }
 
-function callFigureWheel(turn, y, x) {
-    chessFieldPlaces.map((i) => {
-        i.map((j) => {
-            let Place = window.document.getElementById(j);
-            Place.setAttribute("onclick", "");
-            Place.setAttribute("onmouseover", "");
-            Place.setAttribute("onmouseout", "");
+function callPieceWheel() {
+    if (userRights.canPickPiece) {
+        userRights.canMoveFigure = false;
+        attensionCencel();
+        debugger;
+        let attension = window.document.getElementById("attension");
+        attension.style.display = "flex";
+        let attension_window = attension.getElementsByClassName("window")[0];
+        attension_window.style.borderRadius = "100%";
+        attension_window.style.height = "60vh";
+        attension_window.style.width = "60vh";
+        attension_window.style.overflow = "visible";
+        attension_window.style.padding = "40px";
+        attension_window.style.backgroundImage = "url(img/bgheader.png)";
+        let figure_select_wheel = window.document.getElementById("figure_select_wheel");
+        default_pieces_wheel = 0;
+        if (turn === "white") {
+            default_pieces_wheel = ["bq", "bc", "bb", "bn"];
+        } else {
+            default_pieces_wheel = ["wq", "wc", "wb", "wn"];
+        }
+        Object.values(figure_select_wheel.getElementsByClassName("slot")).map((e, i) => {
+            e.classList.remove("bq");
+            e.classList.remove("bc");
+            e.classList.remove("bb");
+            e.classList.remove("bn");
+            e.classList.remove("wq");
+            e.classList.remove("wc");
+            e.classList.remove("wb");
+            e.classList.remove("wn");
+            e.classList.add(default_pieces_wheel[i]);
+            e.addEventListener("click", pieceWheelPick);
         })
-    })
-    attensionCencel();
-    let attension = window.document.getElementById("attension");
-    attension.style.display = "flex";
-    let attension_window = attension.getElementsByClassName[0]("window");
-    attension_window.style.borderRadius = "100vmin";
-    let figure_select_wheel = window.document.getElementById("figure_select_wheel");
-    figure_select_wheel.style.display = "flex";
+        figure_select_wheel.style.display = "flex";
+        window.addEventListener("mousemove", arrowFollowPointer);
+    }
+}
+
+function pieceWheelPick(event) {
+    let valid = false;
+    if (String(event.target.classList).includes("up-left-slot")) {
+        chessField[userRights.canPickPiece[0]][userRights.canPickPiece[1]] = default_pieces_wheel[0];
+        valid = true;
+    } else if (String(event.target.classList).includes("up-right-slot")) {
+        chessField[userRights.canPickPiece[0]][userRights.canPickPiece[1]] = default_pieces_wheel[1];
+        valid = true;
+    } else if (String(event.target.classList).includes("down-left-slot")) {
+        chessField[userRights.canPickPiece[0]][userRights.canPickPiece[1]] = default_pieces_wheel[2];
+        valid = true;
+    } else if (String(event.target.classList).includes("down-right-slot")) {
+        chessField[userRights.canPickPiece[0]][userRights.canPickPiece[1]] = default_pieces_wheel[3];
+        valid = true;
+    }
+
+    if (valid) {
+        default_pieces_wheel = undefined;
+        userRights.canMoveFigure = true;
+        window.removeEventListener("mousemove", arrowFollowPointer);
+
+        let attension = window.document.getElementById("attension");
+        let attension_window = attension.getElementsByClassName("window")[0];
+        attension_window.style.borderRadius = "";
+        attension_window.style.height = "";
+        attension_window.style.width = "";
+        attension_window.style.overflow = "";
+        attension_window.style.padding = "";
+        attension_window.style.backgroundImage = "";
+
+        attensionCencel();
+        arrangeFigures();
+    }
+}
+
+function arrowFollowPointer(event) {
+    let width = window.innerWidth / 2 - parseInt(mouse_pos.x_vp);
+    let height = window.innerHeight / 2 - parseInt(mouse_pos.y_vp);
+    let rotate = Math.atan(height / width) * 180 / Math.PI;
+    if (width < 0) {
+        pick_piece_arrow.style.transform = "rotate(" + String(rotate) + "deg)";
+    } else {
+        pick_piece_arrow.style.transform = "rotate(" + String(rotate + 180) + "deg)";
+    }
+    pick_piece_gear1.style.transform = "rotate(" + String(rotate + 22,5) + "deg)";
+    pick_piece_gear2.style.transform = "rotate(" + String(360 - rotate) + "deg)";
+    // console.log(String(Math.atan(height / width) * 180 / Math.PI));
 }
 
 function attensionCencel() {
@@ -306,8 +398,15 @@ window.document.getElementById("right_click_menu").addEventListener("contextmenu
 window.addEventListener("mousemove", (event) => {
     mouse_pos.y = String(event.pageY) + "px";
     mouse_pos.x = String(event.pageX) + "px";
+    mouse_pos.y_vp = String(event.clientY) + "px";
+    mouse_pos.x_vp = String(event.clientX) + "px";
 });
+
+window.addEventListener("resize", setSizeChessSection);
+// window.addEventListener("resize", getWindowSize);
 
 profileInteract(".name", "name", profile1);
 profileInteract(".elo", "elo", profile1);
 profileInteract(".about", "about", profile1);
+
+setSizeChessSection();
