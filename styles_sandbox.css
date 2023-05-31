@@ -10,6 +10,18 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Inpin';
+  src: url('fonts/inpin/inpin-hongmengti.eot');
+  src: url('fonts/inpin/inpin-hongmengti.eot?#iefix') format('embedded-opentype'),
+      url('fonts/inpin/inpin-hongmengti.woff2') format('woff2'),
+      url('fonts/inpin/inpin-hongmengti.woff') format('woff'),
+      url('fonts/inpin/inpin-hongmengti.ttf') format('truetype'),
+      url('fonts/inpin/inpin-hongmengti.svg#Butler') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -28,16 +40,17 @@ a {
   color: #272727;
 }
 body {
+  height: 2000px;
   font-family: 'Montserrat', sans-serif;
-  padding: 20px;
+  /* font-family: 'Inpin', sans-serif; */
   /* width: 100%;
   height: 100vh; */
   background-color: #f0f0f0;
-  background-image: url(img/bg.aaeca019.jpg);
+  /* background-image: url(img/bg.aaeca019.jpg); */
+  background-image: linear-gradient(#525252, #2a2a2a);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  overflow: hidden;
 }
 
 /* body .glitch_effect {
@@ -105,11 +118,47 @@ body .dark_theme button div {
 
 header {
   width: 100%;
-  position: absolute;
   background-color: black;
-  padding: 20px;
-  text-align: center;
-  z-index: 100;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+
+  background-image: url(img/bgheader.png);
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: 50%;
+}
+
+header .logo {
+  width: calc(10vmin + 100px);
+}
+
+header ul {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+
+  gap: 20px;
+}
+
+header li {
+  list-style-type: none;
+}
+
+header li a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 25px;
+  border-radius: 300px;
+  transition: all 0.2s ease-out;
+  
+  /* border-bottom: 4px dotted white; */
+}
+
+header li a:hover {
+  background-color: white;
+  color: black;
 }
 
 #right_click_menu {
@@ -191,6 +240,19 @@ header {
   animation: 0.3s linear opacity-animation;
 }
 
+#attension::before {
+  content: "";
+
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+
+  background-image: url(img/bg.png);
+  rotate: 45deg;
+}
+
 #attension .window{
   width: calc(80% - 20vw);
   max-height: 80vh;
@@ -198,6 +260,10 @@ header {
   position: relative;
   z-index: 22;
   background-color: #121212;
+
+  background-size: cover;
+  background-position: center;
+
   padding: 40px 30px;
   border-radius: 20px;
   border: 6px solid #353535;
@@ -483,6 +549,99 @@ header {
 
 #edit_profile button:hover {
   background-color: #1a1a1a;
+}
+
+#figure_select_wheel{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#figure_select_wheel .pieces{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 25;
+
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#figure_select_wheel .pieces .slot{
+  width: 50%;
+  height: 50%;
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: scale 0.2s ease-in;
+  caret-color: transparent;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+#figure_select_wheel .pieces .slot:hover{
+  scale: 1.1;
+  background-image: add();
+}
+
+#figure_select_wheel .pieces .up-left-slot{
+  /* transform: translate(-40px, -40px); */
+  background-position: top left;
+}
+
+#figure_select_wheel .pieces .up-right-slot{
+  /* transform: translate(40px, -40px); */
+  background-position: top right;
+}
+
+#figure_select_wheel .pieces .down-left-slot{
+  /* transform: translate(-40px, 40px); */
+  background-position: bottom left;
+}
+
+#figure_select_wheel .pieces .down-right-slot{
+  /* transform: translate(40px, 40px); */
+  background-position: bottom right;
+}
+
+#figure_select_wheel #arrow{
+  position: absolute;
+  z-index: 30;
+  width: 100%;
+  margin: 0 auto;
+  pointer-events: none;
+  caret-color: transparent;
+}
+
+#figure_select_wheel .gears{
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  margin: 0 auto;
+  pointer-events: none;
+  caret-color: transparent;
+  background-color: #000000;
+  border: 3px solid #121212;
+  outline: 6px solid #2e2e2e;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+#figure_select_wheel .gears img{
+  position: absolute;
+
+  width: 60%;
+  height: 60%;
+}
+
+#figure_select_wheel .gears img:nth-child(1){
+  top: 42%;
+  left: 42%;
+  transform: rotate(calc(45deg / 2));
 }
 
 #settings {
@@ -807,6 +966,8 @@ header {
 
 
 body .chess_section {
+  padding: 20px;
+
   display: flex;
   flex-direction: row;
   justify-content: start;
@@ -815,6 +976,78 @@ body .chess_section {
   align-items: stretch;
 
   gap: 20px;
+}
+
+#rightside-bar {
+  font-size: 24px;
+  color: #e0e0e0;
+  background-color: #353535;
+  border-radius: 20px;
+  width: calc((100% - 92px - (100vmin - 92px)) / 2);
+  min-width: 400px;
+  flex-grow: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: stretch;
+
+  border: 6px solid #353535;
+  outline: 3px solid #121212;
+}
+
+#rightside-bar .sandbox-menu{
+  width: 100%;
+  height: 100%;
+  background-color: #121212;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 40px 30px;
+  gap: 20px;
+}
+
+#rightside-bar .sandbox-menu .summon-piece-slot-field{
+  overflow: clip;
+  padding: 30px;
+  background-color: #000000;
+  border-radius: 10px;
+  max-width: 520px;
+  margin-bottom: 20px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
+  flex-wrap: wrap;
+}
+
+#rightside-bar .sandbox-menu .summon-piece-slot-field .slot{
+  margin: 6px;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 20px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0;
+  outline: 6px solid rgba(40, 100, 200, 0);
+  outline-offset: 3px;
+  transition: all 0.1s linear;
+  flex-grow: 0;
+  flex-basis: auto;
+  cursor: grab;
+  caret-color: transparent;
+}
+
+#rightside-bar .sandbox-menu .summon-piece-slot-field .slot:hover{
+  outline: 6px solid #121212;
+}
+
+#rightside-bar .sandbox-menu h2{
+  font-size: calc(16px + 0.4vw);
 }
 
 #leftside-bar {
@@ -898,7 +1131,8 @@ body .chess_section {
   position: relative;
   background-color: #121212;
   padding: 40px 30px;
-  border-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 
   flex-grow: 1;
 }
@@ -907,7 +1141,8 @@ body .chess_section {
   position: relative;
   background-color: #121212;
   padding: 40px 30px;
-  border-radius: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 #leftside-bar .bottom_side .headline{
@@ -1091,7 +1326,7 @@ body .chess_section {
   width: 100%;
   display: block;
   transition: all 0.1s linear;
-  padding: 20px 60px;
+  padding: 15px 40px;
   border-radius: 20px;
   background-color: #1e1e1e;
   border-radius: 40px;
@@ -1301,8 +1536,8 @@ body .chess_section section {
 #chess_field .place {
   position: relative;
   caret-color: transparent;
-  height: calc((100vmin - 92px) / 8);
-  width: calc((100vmin - 92px) / 8);
+  height: calc(100% / 8);
+  width: calc(100% / 8);
   /* min-width: 50px;
   min-height: 50px; */
   background-color: #ffffff00;
@@ -1323,8 +1558,8 @@ body .chess_section section {
   display: none;
   top: 0;
   left: 0;
-  height: calc((100vmin - 92px) / 8);
-  width: calc((100vmin - 92px) / 8);
+  height: calc(100% / 8);
+  width: calc(100% / 8);
   min-width: 50px;
   min-height: 50px;
   position: absolute;
@@ -1342,8 +1577,8 @@ body .chess_section section {
   display: none;
   top: 0;
   left: 0;
-  height: calc((100vmin - 92px) / 8);
-  width: calc((100vmin - 92px) / 8);
+  height: calc(100% / 8);
+  width: calc(100% / 8);
   min-width: 50px;
   min-height: 50px;
   position: absolute;
@@ -1625,127 +1860,68 @@ body section #chess_field .sp:hover {
   width: 100%;
   background-position: center;
   background-size: contain;
+  background-repeat: no-repeat;
   /* z-index: 4; */
 }
 
-#chess_field .bp {
+.bp {
   background-image: url(img/bp.png);
   transition: transform 0.2s linear;
 }
 
-#chess_field .bp:hover {
-  background-image: url(img/bp.png);
-  /* transform: translate(0px, -5px); */
-}
-
-#chess_field .wp {
+.wp {
   background-image: url(img/wp.png);
   transition: transform 0.2s linear;
 }
 
-#chess_field .wp:hover {
-  background-image: url(img/wp.png);
-  /* transform: translate(0px, -5px); */
-}
-
-#chess_field .bk {
+.bk {
   background-image: url(img/bk.png);
   transition: transform 0.2s linear;
 }
 
-#chess_field .bk:hover {
-  background-image: url(img/bk.png);
-  /* transform: translate(0px, -5px); */
-}
-
-#chess_field .wk {
+.wk {
   background-image: url(img/wk.png);
   transition: transform 0.2s linear;
 }
 
-#chess_field .wk:hover {
-  background-image: url(img/wk.png);
-  /* transform: translate(0px, -5px); */
-}
-
-#chess_field .bq {
+.bq {
   background-image: url(img/bq.png);
   transition: transform 0.2s linear;
 }
 
-#chess_field .bq:hover {
-  background-image: url(img/bq.png);
-  /* transform: translate(0px, -5px); */
-}
-
-#chess_field .wq {
+.wq {
   background-image: url(img/wq.png);
   transition: transform 0.2s linear;
 }
 
-#chess_field .wq:hover {
-  background-image: url(img/wq.png);
-  /* transform: translate(0px, -5px); */
-}
-
-#chess_field .bb {
+.bb {
   background-image: url(img/bb.png);
   transition: transform 0.2s linear;
 }
 
-#chess_field .bb:hover {
-  background-image: url(img/bb.png);
-  /* transform: translate(0px, -5px); */
-}
-
-#chess_field .wb {
+.wb {
   background-image: url(img/wb.png);
   transition: transform 0.2s linear;
 }
 
-#chess_field .wb:hover {
-  background-image: url(img/wb.png);
-  /* transform: translate(0px, -5px); */
-}
-
-#chess_field .bc {
+.bc {
   background-image: url(img/bc.png);
   transition: transform 0.2s linear;
 }
 
-#chess_field .bc:hover {
-  background-image: url(img/bc.png);
-  /* transform: translate(0px, -5px); */
-}
-
-#chess_field .wc {
+.wc {
   background-image: url(img/wc.png);
   transition: transform 0.2s linear;
 }
 
-#chess_field .wc:hover {
-  background-image: url(img/wc.png);
-  /* transform: translate(0px, -5px); */
-}
-
-#chess_field .bn {
+.bn {
   background-image: url(img/bn.png);
   transition: transform 0.2s linear;
 }
 
-#chess_field .bn:hover {
-  background-image: url(img/bn.png);
-  /* transform: translate(0px, -5px); */
-}
-
-#chess_field .wn {
+.wn {
   background-image: url(img/wn.png);
   transition: transform 0.2s linear;
-}
-
-#chess_field .wn:hover {
-  background-image: url(img/wn.png);
-  /* transform: translate(0px, -5px); */
 }
 
 .dark-mode {
