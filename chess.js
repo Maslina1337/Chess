@@ -1,8 +1,20 @@
 function arrangeFigures() {
+    clearPossibleMovesFull();
+
+    if (rasidual.y_from !== undefined) {
+        window.document.getElementById(chessFieldPlaces[rasidual.y_from][rasidual.x_from]).style.backgroundColor = rasidualTrace;
+        window.document.getElementById(chessFieldPlaces[rasidual.y_to][rasidual.x_to]).style.backgroundColor = rasidualTrace;
+    }
+
+    if (rasidual.y_from2 !== undefined) {
+        window.document.getElementById(chessFieldPlaces[rasidual.y_from2][rasidual.x_from2]).style.backgroundColor = rasidualTraceSec;
+        window.document.getElementById(chessFieldPlaces[rasidual.y_to2][rasidual.x_to2]).style.backgroundColor = rasidualTraceSec;
+    }
+
     chessField.map((i, y) => {i.map((j, x) => {
             if (j !== 0) {
                 generateMovesWithoutMap(j,y,x);
-
+                
                 let place = window.document.getElementById(`place${y+1}${x+1}`);
                 let figure = document.createElement("div");
                 figure.classList.add("figure");
@@ -18,10 +30,6 @@ function arrangeFigures() {
                 WKingCords = [y,x];
             } else if (j === "bk") {
                 BKingCords = [y,x];
-            } else if (j[1] === "p") {
-                if (j[0] === "w" && y === 0 || j[0] === "b" && y === 7) {
-                    callFigureWheel(turn, y, x);
-                }
             }
         })});
     showPawnStep();
@@ -396,55 +404,296 @@ function fakeArrageFigures(fakeChessField) {
         element.style.top = chessFieldCords[pawnStep[0]];
         element.style.left = chessFieldCords[pawnStep[1]];
     }
+}
 
-    // if (turn === "white") {
-    //     let b = window.document.getElementById('turnB');
-    //     b.getElementsByTagName('h1')[0].style.display = 'none';
-    //     let w = window.document.getElementById('turnW');
-    //     w.getElementsByTagName('h1')[0].style.display = 'flex';
-    // } else {
-    //     let w = window.document.getElementById('turnW');
-    //     w.getElementsByTagName('h1')[0].style.display = 'none';
-    //     let b = window.document.getElementById('turnB');
-    //     b.getElementsByTagName('h1')[0].style.display = 'flex';
-    // }
+function MoveFigure(y, x, toy, tox) {
+    if (userRights.canMoveFigure) {
+        if (chessField[y][x][0] !== turn[0] || moves[String(y) + String(x)][toy][tox] === 0) {
+            return 0;
+        }
 
-    // if (turn === "white") {
-    //     for (let i = 0; i < 8; i++) {
-    //         for (let j = 0; j < 8; j++) {
-    //             if (chessField[i][j][0] === "w") {
-    //                 if (JSON.stringify(moves[String(i) + String(j)]) !== JSON.stringify([[0, 0, 0, 0, 0, 0, 0, 0],
-    //                 [0, 0, 0, 0, 0, 0, 0, 0],
-    //                 [0, 0, 0, 0, 0, 0, 0, 0], 
-    //                 [0, 0, 0, 0, 0, 0, 0, 0], 
-    //                 [0, 0, 0, 0, 0, 0, 0, 0], 
-    //                 [0, 0, 0, 0, 0, 0, 0, 0], 
-    //                 [0, 0, 0, 0, 0, 0, 0, 0], 
-    //                 [0, 0, 0, 0, 0, 0, 0, 0]])) {
-    //                     return 0;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // } else {
-    //     for (let i = 0; i < 8; i++) {
-    //         for (let j = 0; j < 8; j++) {
-    //             if (chessField[i][j][0] === "b") {
-    //                 if (JSON.stringify(moves[String(i) + String(j)]) !== JSON.stringify([[0, 0, 0, 0, 0, 0, 0, 0],
-    //                 [0, 0, 0, 0, 0, 0, 0, 0],
-    //                 [0, 0, 0, 0, 0, 0, 0, 0], 
-    //                 [0, 0, 0, 0, 0, 0, 0, 0], 
-    //                 [0, 0, 0, 0, 0, 0, 0, 0], 
-    //                 [0, 0, 0, 0, 0, 0, 0, 0], 
-    //                 [0, 0, 0, 0, 0, 0, 0, 0], 
-    //                 [0, 0, 0, 0, 0, 0, 0, 0]])) {
-    //                     return 0;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-    // callAttensionStandart((turn === "white" ? "Черные одержали победу!" : "Белые одержали победу!"))
+        let name = chessField[y][x]
+
+        if (pawnStep.length !== 0) {                                //beat pawn step check
+            if (toy === pawnStep[0] && tox === pawnStep[1]) {
+                if (name === "wp") {
+                    chessField[toy + 1][tox] = 0;
+                } else if (name === "bp") {
+                    chessField[toy - 1][tox] = 0;
+                }
+            }
+        }
+
+        if (chessField[y][x][1] === "k" && moves[String(y) + String(x)][0][0] === 3 || moves[String(y) + String(x)][0][7] === 3 || moves[String(y) + String(x)][7][0] === 3 || moves[String(y) + String(x)][7][7] === 3) {
+            if (chessField[y][x][0] === "w" && !WKingWasMoved) {
+                let sessionHistory = JSON.parse(sessionStorage.getItem("sessionHistory"));
+        let fromTo = {
+            from: [y, x],
+            to: [toy, tox],
+            beatenFigure: chessField[toy][tox],
+            moveType: "castling"
+        }
+
+                if (toy === 7 && tox === 0) {
+                    window.document.getElementById(chessFieldPlaces[y][x]).classList.remove("wk");
+                    window.document.getElementById(chessFieldPlaces[y][x]).classList.remove('selectedPlace');
+                    window.document.getElementById(chessFieldPlaces[y][x]).classList.add('place');
+                    window.document.getElementById(chessFieldPlaces[y][x]).setAttribute('onclick', "");
+                    window.document.getElementById(chessFieldPlaces[0][2]).classList.remove('placeToMove');
+                    window.document.getElementById(chessFieldPlaces[0][2]).classList.remove('placeToBeat');
+        
+                    countMoves[7][2] = countMoves[y][x] + 1;
+                    countMoves[y][x] = 0;
+        
+                    chessField[7][2] = chessField[y][x];
+                    chessField[y][x] = 0;
+        
+                    chessField[7][3] = chessField[toy][tox];
+                    chessField[toy][tox] = 0;
+        
+                    WKingCords = [7,2];
+                    WKingWasMoved = true;
+        
+                    unselectFigure();
+                    clearPossibleMovesFull();
+
+                    rasidual.y_from = y;
+                    rasidual.x_from = x;
+                    rasidual.y_to = 7;
+                    rasidual.x_to = 2;
+                    rasidual.y_from2 = toy;
+                    rasidual.x_from2 = tox;
+                    rasidual.y_to2 = 7;
+                    rasidual.x_to2 = 3;
+
+                    moves = {};
+                    turn = (turn === "white" ? "black" : "white");
+    
+                    sessionHistory.push(fromTo);
+                    sessionStorage.setItem("sessionHistory", JSON.stringify(sessionHistory));
+    
+                    arrangeFigures();
+                    return 1;
+                } else if (toy === 7 && tox === 7) {
+                    window.document.getElementById(chessFieldPlaces[y][x]).classList.remove("wk");
+                    window.document.getElementById(chessFieldPlaces[y][x]).classList.remove('selectedPlace');
+                    window.document.getElementById(chessFieldPlaces[y][x]).classList.add('place');
+                    window.document.getElementById(chessFieldPlaces[y][x]).setAttribute('onclick', "");
+                    window.document.getElementById(chessFieldPlaces[0][2]).classList.remove('placeToMove');
+                    window.document.getElementById(chessFieldPlaces[0][2]).classList.remove('placeToBeat');
+        
+                    countMoves[7][6] = countMoves[y][x] + 1;
+                    countMoves[y][x] = 0;
+        
+                    chessField[7][6] = chessField[y][x];
+                    chessField[y][x] = 0;
+        
+                    chessField[7][5] = chessField[toy][tox];
+                    chessField[toy][tox] = 0;
+        
+                    WKingCords = [7,6];
+                    WKingWasMoved = true;
+        
+                    unselectFigure();
+                    clearPossibleMovesFull();
+
+                    rasidual.y_from = y;
+                    rasidual.x_from = x;
+                    rasidual.y_to = 7;
+                    rasidual.x_to = 6;
+                    rasidual.y_from2 = toy;
+                    rasidual.x_from2 = tox;
+                    rasidual.y_to2 = 7;
+                    rasidual.x_to2 = 5;
+
+                    moves = {};
+                    turn = (turn === "white" ? "black" : "white");
+    
+                    sessionHistory.push(fromTo);
+                    sessionStorage.setItem("sessionHistory", JSON.stringify(sessionHistory));
+    
+                    arrangeFigures();
+                    return 1;
+                }
+            } else if (chessField[y][x][0] === "b" && !BKingWasMoved) {
+                let sessionHistory = JSON.parse(sessionStorage.getItem("sessionHistory"));
+        let fromTo = {
+            from: [y, x],
+            to: [toy, tox],
+            beatenFigure: chessField[toy][tox],
+            moveType: "castling"
+        }
+
+        if (chessField[y][x][0] === "b" && chessField[toy][tox][0] === "b") {
+            if (toy === 0 && tox === 0) {
+                window.document.getElementById(chessFieldPlaces[y][x]).classList.remove("bk");
+                window.document.getElementById(chessFieldPlaces[y][x]).classList.remove('selectedPlace');
+                window.document.getElementById(chessFieldPlaces[y][x]).classList.add('place');
+                // window.document.getElementById(chessFieldPlaces[y][x]).setAttribute('onclick', "");
+                window.document.getElementById(chessFieldPlaces[0][2]).classList.remove('placeToMove');
+                window.document.getElementById(chessFieldPlaces[0][2]).classList.remove('placeToBeat');
+    
+                countMoves[0][2] = countMoves[y][x] + 1;
+                countMoves[y][x] = 0;
+    
+                chessField[0][2] = chessField[y][x];
+                chessField[y][x] = 0;
+                chessField[0][3] = chessField[toy][tox];
+                chessField[toy][tox] = 0;
+    
+                BKingCords = [0,2];
+                BKingWasMoved = true;
+    
+                unselectFigure();
+                clearPossibleMovesFull();
+
+                rasidual.y_from = y;
+                rasidual.x_from = x;
+                rasidual.y_to = 0;
+                rasidual.x_to = 2;
+                rasidual.y_from2 = toy;
+                rasidual.x_from2 = tox;
+                rasidual.y_to2 = 0;
+                rasidual.x_to2 = 3;
+
+                moves = {};
+                turn = (turn === "white" ? "black" : "white");
+
+                sessionHistory.push(fromTo);
+                sessionStorage.setItem("sessionHistory", JSON.stringify(sessionHistory));
+
+                arrangeFigures();
+                return 1;
+            } else if (toy === 0 && tox === 7) {
+                window.document.getElementById(chessFieldPlaces[y][x]).classList.remove("bk");
+                window.document.getElementById(chessFieldPlaces[y][x]).classList.remove('selectedPlace');
+                window.document.getElementById(chessFieldPlaces[y][x]).classList.add('place');
+                // window.document.getElementById(chessFieldPlaces[y][x]).setAttribute('onclick', "");
+                window.document.getElementById(chessFieldPlaces[0][2]).classList.remove('placeToMove');
+                window.document.getElementById(chessFieldPlaces[0][2]).classList.remove('placeToBeat');
+    
+                countMoves[0][6] = countMoves[y][x] + 1;
+                countMoves[y][x] = 0;
+    
+                chessField[0][6] = chessField[y][x];
+                chessField[y][x] = 0;
+    
+                chessField[0][5] = chessField[toy][tox];
+                chessField[toy][tox] = 0;
+    
+                BKingCords = [0,6];
+                BKingWasMoved = true;
+    
+                unselectFigure();
+                clearPossibleMovesFull();
+
+                rasidual.y_from = y;
+                rasidual.x_from = x;
+                rasidual.y_to = 0;
+                rasidual.x_to = 6;
+                rasidual.y_from2 = toy;
+                rasidual.x_from2 = tox;
+                rasidual.y_to2 = 0;
+                rasidual.x_to2 = 5;
+
+                moves = {};
+                turn = (turn === "white" ? "black" : "white");
+
+                sessionHistory.push(fromTo);
+                sessionStorage.setItem("sessionHistory", JSON.stringify(sessionHistory));
+
+                arrangeFigures();
+                return 1;
+            }
+        }
+            }
+        }
+
+        if (chessField[toy][tox] != 0) {
+            if (turn === "white") {
+                beatenFiguresBlack.push(chessField[toy][tox]);
+                compliteBeatenFigures(turn);
+            } else {
+                beatenFiguresWhite.push(chessField[toy][tox]);
+                compliteBeatenFigures(turn);
+            }
+        }
+    
+        let sessionHistory = JSON.parse(sessionStorage.getItem("sessionHistory"));
+        let fromTo = {
+            from: [y, x],
+            to: [toy, tox],
+            beatenFigure: chessField[toy][tox],
+            moveType: "standart"
+        }
+        
+        chessField[y][x] = 0;
+        countMoves[toy][tox] = countMoves[y][x] + 1;
+        countMoves[y][x] = 0;
+        chessField[toy][tox] = name;
+    
+        unselectFigure();
+        turn = (turn === "white" ? "black" : "white");
+        moves = {};
+        pawnStep = [];
+        let place = window.document.getElementById(chessFieldPlaces[y][x]);
+        place.removeEventListener("click", eventSelectFigureSmart);
+        place.removeEventListener("mouseover", eventShowPossibleMoves);
+        place.removeEventListener("mouseout", eventClearPossibleMoves);
+    
+        if (name === "wk") {
+            WKingCords = [toy, tox];
+            WKingWasMoved = true;
+            // pawnStep = [];
+        } else if (name === "bk") {
+            BKingCords = [toy, tox];
+            BKingWasMoved = true;
+            // pawnStep = [];
+        } else if (name === "wp") {
+            if (countMoves[toy][tox] === 1 && toy === 4) {
+                pawnStep = [toy + 1, tox];
+                fromTo.moveType = "pawnJump"
+            }
+            if (toy === 0) {
+                userRights.canPickPiece = [toy, tox];
+                callPieceWheel();
+                return 0;
+            }
+        } else if (name === "bp") {
+            if (countMoves[toy][tox] === 1 && toy === 3) {
+                pawnStep = [toy - 1, tox];
+                fromTo.moveType = "pawnJump"
+            }
+            if (toy === 7) {
+                userRights.canPickPiece = [toy, tox];
+                callPieceWheel();
+                return 0;
+            } 
+        }
+
+        sessionHistory.push(fromTo);
+        sessionStorage.setItem("sessionHistory", JSON.stringify(sessionHistory));
+    
+        historyStep++;
+        for (let y = 0; y < 8; y++) {
+            for (let x = 0; x < 8; x++) {
+                fakeChessField[y][x] = chessField[y][x]
+            }
+        }
+    
+        clearPossibleMovesFull();
+
+        rasidual.y_from = y;
+        rasidual.x_from = x;
+        rasidual.y_to = toy;
+        rasidual.x_to = tox;
+        rasidual.y_from2 = undefined;
+        rasidual.x_from2 = undefined;
+        rasidual.y_to2 = undefined;
+        rasidual.x_to2 = undefined;
+
+        arrangeFigures();
+    }
 }
 
 arrangeFigures();
