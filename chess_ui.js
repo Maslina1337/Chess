@@ -313,7 +313,7 @@ function unselectFigure() {
     // clearPossibleMoves();
     let selected_place = window.document.getElementById(chessFieldPlaces[selectedFigure[1]][selectedFigure[2]]);
     selected_place.getElementsByClassName("blaze")[0].style.border = "0px solid #00000000";
-    window.document.getElementById('select').style.display = 'none';
+    // window.document.getElementById('select').style.display = 'none';
     selected_place.removeEventListener("click", eventUnselectFigure);
 
     selectedFigure = [];
