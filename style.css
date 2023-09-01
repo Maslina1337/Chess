@@ -15,6 +15,26 @@ body {
     width: 100%;
 }
 
+#alert {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    border-radius: 10px;
+    background-color: rgb(0, 170, 0);
+    color: white;
+    /* border: 1px solid rgb(0, 100, 0); */
+    padding: 10px 20px;
+    pointer-events: none;
+    z-index: 20;
+    transition: all ease-out 0.2s;
+    translate: 0 -100px;
+    opacity: 0;
+}
+
+.notification_mobile {
+    display: none;
+}
+
 header {
     width: 100%;
     background-color: white;
@@ -63,6 +83,12 @@ header .info .numbers .number {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    cursor: pointer;
+    transition: all ease-out 0.2s;
+}
+
+.number:hover {
+    translate: 0 -5px;
 }
 
 header .info .numbers .number .number_type {
@@ -296,9 +322,10 @@ footer .logo img {
 
 footer .info {
     display: flex;
+    flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
 }
 
 footer .info .numbers {
@@ -360,8 +387,17 @@ footer .icon_place img{
         padding: 0;
     }
 
+    .headline .floating_img:hover {
+        scale: 1;
+        rotate: 0deg;
+    }
+
     .wrapper {
         width: 100%;
+    }
+
+    .place:hover {
+        translate: 0;
     }
 
     .content_box {
@@ -383,5 +419,112 @@ footer .icon_place img{
 
     footer {
         padding: 0 20px;
+    }
+
+    .number:hover {
+        translate: 0 0;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    header {
+        padding: 0 10px;
+    }
+
+    header .logo {
+        padding: 0 10px;
+    }
+
+    header .logo img{
+        width: 10vw;
+    }
+
+    header .number {
+        padding: 3px;
+    }
+
+    header .number .number_type { 
+        font-size: 14px!important; 
+    }
+
+    header .number .icon_place img{
+        width: 4vw;
+    }
+
+    header .number strong{
+        font-size: 16px;
+    }
+
+    .headline {
+        gap: 20px;
+    }
+
+    .headline h1 {
+        font-size: 20px;
+        line-height: 40px;
+    }
+
+    .headline p {
+        font-size: 16px;
+    }
+
+    .product_table .place{
+        width: calc(100% - 5px);
+        padding: 10px;
+    }
+
+    .product_table .place .right_side h3{
+        font-size: 24px;
+    }
+
+    .product_table .place .right_side .price{
+        font-size: 18px;
+    }
+
+    .content_box .content_side {
+        padding: 10px;
+    }
+
+    footer {
+        padding: 0 10px;
+    }
+
+    footer .logo {
+        padding: 0 10px;
+    }
+
+    footer .logo img{
+        width: 10vw;
+    }
+
+    footer .number {
+        padding: 3px;
+    }
+
+    footer .number .number_type { 
+        font-size: 14px!important; 
+    }
+
+    footer .number .icon_place img{
+        width: 4vw;
+    }
+
+    footer .number strong{
+        font-size: 16px;
+    }
+
+    footer .info {
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    footer .notification {
+        display: none;
+    }
+
+    footer .notification_mobile {
+        display: block;
+        font-size: 12px;
+        padding-bottom: 10px;
     }
 }
