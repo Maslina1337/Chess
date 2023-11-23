@@ -1,0 +1,117 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: #272727;
+}
+body {
+  font-family: 'Montserrat', sans-serif;
+  padding: 20px;
+  width: 100%;
+  height: 100vh;
+  background-color: #f0f0f0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+body .dark_theme {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  position: absolute;
+  z-index: 30;
+  top: 50px;
+  right: 50px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+}
+body .dark_theme button {
+  margin-left: 20px;
+  padding: 0;
+  width: 4.2em;
+  height: 2em;
+  border-radius: 1em;
+  border: none;
+  background-color: #838383;
+  transition: all 1s linear;
+}
+body .dark_theme button div {
+  height: 2em;
+  width: 2em;
+  border-radius: 1em;
+  background-color: #464646;
+  transform: translate(0) scale(1.2);
+  transition: all 0.1s ease-in;
+}
+body aside {
+  font-size: 24px;
+  height: 100%;
+  color: #272727;
+  background-color: #e3e3e3;
+  border-radius: 20px;
+  padding: 40px 0;
+}
+body aside ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+body aside ul li {
+  width: 100%;
+  text-align: center;
+}
+body aside ul a {
+  display: block;
+  transition: all 0.1s linear;
+  padding: 20px 60px;
+}
+body aside ul a:hover {
+  background-color: #727272;
+  color: #f0f0f0;
+}
+body .youAreHere {
+  text-align: center;
+  padding: 20px 60px;
+  background-color: #525252;
+  color: #f0f0f0;
+}
+body .youAreHere:hover {
+  background-color: #3f3f3f;
+  color: #f0f0f0;
+}
+body section {
+  margin-left: 20px;
+  height: 100%;
+  background-color: #e3e3e3;
+  border-radius: 20px;
+  width: 100%;
+}
+.dark-mode {
+  background-color: #2a2a2a;
+  color: #e3e3e3;
+}
+.dark-mode .dark_theme {
+  background-color: #2a2a2a;
+}
+.dark-mode aside {
+  background-color: #1e1e1e;
+  color: #e3e3e3;
+}
+.dark-mode aside a {
+  color: #e3e3e3;
+}
+.dark-mode aside a:hover {
+  background-color: #3f3f3f;
+}
+.dark-mode section {
+  background-color: #1e1e1e;
+  color: #e3e3e3;
+}
