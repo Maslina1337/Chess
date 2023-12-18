@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles/multiplayer_styles.css" rel="stylesheet">
+    <link href="styles/attension_styles.css" rel="stylesheet">
+    <link href="styles/game_search_field_styles.css" rel="stylesheet">
+
+    <!-- <link rel="prefetch" href="img/bcSwitch.png" /> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sanchez&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <title>{{title}}</title>
+</head>
+<body>
+    <div id="game-search-field">
+        {{!-- <img class="shine" src="img/green_shining.png" alt=""> --}}
+        <div class="game-search-wait">
+            <div class="left-side">
+                <img src="img/loading.gif" alt="">
+            </div>
+            <div class="right-side">
+                <h2 id="game-search-h2">Поиск игры</h2>
+                <p>Ожидаем достойного соперника...</p>
+                <button class="exit-search-button">Отменить</button>
+            </div>
+        </div>
+
+        <div class="game-search-found">
+            <h2>Игра найдена.<span class="timer"><span class="min">99</span><span>:</span><span class="sec">99</span></span></h2>
+            <div class="profile_row">
+                <div class="left-side">
+                    <img src="img/avatars/empty-avatar.png" alt="">
+                </div>
+                <div class="right-side">
+                    <h3 class="nickname">NICKNAME</h3>
+                    <p class="elo">ELO</p>
+                </div>
+            </div>
+            <footer>
+                <button class="exit-search-button">Отменить поиск</button>
+                <button class="deny-search-button">Отклонить</button>
+                <button class="accept-search-button">Принять</button>
+            </footer>
+        </div>
+
+        <div class="game-search-found-wait">
+            <h2>Игра найдена.<span class="timer"><span class="min">99</span><span>:</span><span class="sec">99</span></span></h2>
+            <h3>Ождаем, пока соперник примет игру...</h3>
+            <footer>
+                <button class="exit-search-button">Отменить поиск</button>
+            </footer>
+        </div>
+
+        <div class="game-return">
+            <h2>Игра ещё не закончена.</h2>
+            <h3>ᕦ(ò_óˇ)ᕤ</h3>
+            <footer>
+                <a href="/multiplayer_play_page" class="return-search-button">Вернуться в игру</a>
+            </footer>
+        </div>
+    </div>
+    <div id="attension">
+        <div class="quit"></div>
+        <div class="window">
+            <div id="accept_game">
+                <h1>Игра найдена</h1>
+                <div class="opponent-row">
+                    <h2>Оппонент:</h2>
+                    <div class="user-show-row">
+                        <div class="left-side">
+                            <img src="/img/avatars/empty-avatar.png" alt="">
+                        </div>
+                        <div class="right-side">
+                            <h2>NICKNAME</h2>
+                            <div class="elo">333</div>
+                        </div>
+                    </div>
+                </div>
+                <footer>
+                    <button class="reject_button">Отмена</button>
+                    <button class="accept_button">Сохранить</button>
+                </footer>
+            </div>
+            <div id="figure_select_wheel">
+                <img src="img/piecePickArrow.png" alt="arrow" id="arrow"></img>
+                <div class="gears">
+                    <img src="img/Gear.png" alt="gear" id="gear1">
+                    <img src="img/Gear.png" alt="gear" id="gear2">
+                </div>
+                <div class="pieces">
+                    <button class="up-left-slot slot"></button>
+                    <button class="up-right-slot slot"></button>
+                    <button class="down-left-slot slot"></button>
+                    <button class="down-right-slot slot"></button>
+                </div>
+            </div>
+            <div id="attension_standart">
+                <h2>ATTENSION_NAME</h2>
+                <button onclick="attensionCencel()">O.K.</button>
+            </div>
+            <div id="attension_question">
+                <h2>QUESTION_NAME</h2>
+                <div class="buttons">
+                    <button onclick="attensionCencel()">O.K.</button>
+                    <button onclick="attensionCencel()">O.K.</button>
+                </div>
+            </div>
+            <div id="settings">
+                <h2>Настройки</h2>
+                <div id="field_select" class="field_select">
+                    <div>
+                        <h3>Шахматное поле</h3>
+                    </div>
+                    <div class="slot_field">
+                    </div>
+                    <div class="OpenCloseDiv">
+                        <input type="checkbox" class="OpenClose" name="OpenClose" onchange="OpenCloseSwitch('field_select', 152)">
+                        <label for="OpenClose"></label>
+                    </div>
+                </div>
+                <div class="footer">
+                    <button onclick="attensionCencel(); fieldRefresh()">Сбросить поле</button>
+                    <button onclick="attensionCencel()">Выйти</button>
+                </div>
+            </div>
+            <div id="edit_profile">
+                <h1>Редактор профиля</h1>
+
+                <div class="nickname_row">
+                    <label for="input_nickname">Никнейм: </label>
+                    {{!-- <div class="unlock-button-container">
+                        <i class="bi bi-pen-fill"></i>
+                        <input type="checkbox" id="nickname_unlock_button">
+                    </div> --}}
+                    <label class="counter counter-nickname" string="0/{{max_user_nickname_length}}">
+                        <input id="input_nickname" type="text" placeholder="Никнейм" autocomplete="off">
+                    </label>
+                    {{!-- <p id="locked_nickname" class="locked"></p> --}}
+                </div>
+                <div class="login_row">
+                    <label for="input_login">Логин: </label>
+                    <div class="unlock-button-container">
+                        <i class="bi bi-pen-fill"></i>
+                        <input type="checkbox" id="login_unlock_button">
+                    </div>
+                    <label class="counter counter-login" string="0/{{max_user_login_length}}">
+                        <input id="input_login" type="text" placeholder="Никнейм" autocomplete="off">
+                    </label>
+                    <p id="locked_login" class="locked"></p>
+                </div>
+                <div class="password_row">
+                    <label for="input_password">Пароль: </label>
+                        <div class="unlock-button-container">
+                            <i class="bi bi-pen-fill"></i>
+                            <input type="checkbox" id="password_unlock_button">
+                        </div>
+                        <div class="password-unhide-button-container">
+                            <i class="bi bi-eye-fill"></i>
+                            <input type="checkbox" id="password_unhide_button">
+                        </div>
+                        <label class="counter counter-password" string="0/{{max_user_password_length}}">
+                            <input id="input_password" type="password" placeholder="Пароль" autocomplete="off">
+                        </label>
+                        <p id="locked_password" class="locked"></p>
+                </div>
+                <div class="about_row">
+                    <label for="input_about">Подробнее: </label>
+                    {{!-- <div class="unlock-button-container">
+                        <i class="bi bi-pen-fill"></i>
+                        <input type="checkbox" id="nickname_unlock_button">
+                    </div> --}}
+                    <label class="counter counter-about" string="0/{{max_user_about_length}}">
+                        <input id="input_about" type="text" placeholder="{{random_about_placeholder}}" autocomplete="off">
+                    </label>
+                    {{!-- <p id="locked_nickname" class="locked"></p> --}}
+                </div>
+                <button class="exit_accaunt_button">Выйти из аккаунта</button>
+                <div id="save_error_message"></div>
+                <footer>
+                    <button class="close_button">Отмена</button>
+                    <button class="save_button">Сохранить</button>
+                </footer>
+            </div>
+            <div id="edit_icon_scale_position">
+                <h2>Редактор иконки</h2>
+                <div class="icon_change_field">
+                    <img src="img/mj.jpg" alt="profile_new_icon">
+                    <div class="clip_field"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header>
+        <a href="/"><img src="img/cheess-logo-white.png" class="logo"></img></a>
+        <div class="mini-profile">
+            <h4 class="user-nickname">{{user_nickname}}</h4>
+            <div class="profile_icon">
+            {{#if is_authorized}}
+            <button class="user-avatar" onclick="callProfileEdit()" style="background-image: url('../img/avatars/{{user_avatar}}');"><div class="fade"><i class="bi bi-pencil-square"></i></div></button>
+            {{else}}
+            <a class="user-avatar" href="/authorization_page"><img src="img/avatars/{{user_avatar}}"><div class="fade"><i class="bi bi-door-open-fill"></i></div></a>
+            {{/if}}
+            {{#if is_authorized}}
+            <span class="elo">{{user_elo}}</span>
+            {{/if}}
+            </div>
+        </div>
+    </header>
+    <div class="wrapper">
+        <div class="search-box">
+        <div class="left-side">
+            <img src="img/standart_gamemode_choose.png" alt="">
+        </div>
+        <div class="right-side">
+            <div class="config-section">
+                <div class="mode-choose-buttons choose-buttons">
+                    <div class="radio-container">
+                        <input value="c" id="radio-classic" type="radio" name="mode-radio" checked>
+                        <label for="radio-classic">Классика</label>
+                    </div>
+                    <div class="radio-container">
+                        <input value="b" id="radio-bliz" type="radio" name="mode-radio">
+                        <label for="radio-bliz">Блиц</label>
+                    </div>
+                    <div class="radio-container">
+                        <input value="f" id="radio-fate" type="radio" name="mode-radio">
+                        <label for="radio-fate">Судьба</label>
+                    </div>
+                </div>
+                <div class="rank-choose-buttons choose-buttons">
+                    <div class="radio-container">
+                        <input value="false" id="radio-unranked" type="radio" name="rank-radio" checked>
+                        <label for="radio-unranked">Безранговый</label>
+                    </div>
+                    <div class="radio-container">
+                        <input value="true" id="radio-ranked" type="radio" name="rank-radio">
+                        <label for="radio-ranked">Ранговый</label>
+                    </div>
+                </div>
+                <div class="speed-choose-buttons choose-buttons">
+                    <div class="radio-container">
+                        <input value="f" id="radio-fast" type="radio" name="speed-radio" checked>
+                        <label for="radio-fast">Быстрый</label>
+                    </div>
+                    <div class="radio-container">
+                        <input value="s" id="radio-slow" type="radio" name="speed-radio">
+                        <label for="radio-slow">Медленный</label>
+                    </div>
+                    <div class="radio-container">
+                        <input value="foa" id="radio-slow" type="radio" name="speed-radio">
+                        <label for="radio-slow">Первый попавшийся</label>
+                    </div>
+                </div>
+            </div>
+            <button id="search-start">Начать поиск</button>
+        </div>
+    </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/scripts/socket_scripts.js"></script>
+
+    <script defer src="scripts/multiplayer_scripts.js"></script>
+    <script defer src="scripts/scripts_most.js"></script>
+    <script defer src="scripts/attension.js"></script>
+</body>
+</html>
