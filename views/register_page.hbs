@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+
+    <link rel="stylesheet" href="styles/register_styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sanchez&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+</head>
+<body>
+    <header>
+        <a href="/"><img src="img/cheess-logo-white.png" class="logo"></img></a>
+    </header>
+
+    <div class="register-section">
+        <div class="register-box">
+            <h1>Регистрация</h1>
+            <form>
+                {{!-- <input id="input_login" type="text" min="{{min_user_login_length}}" max="{{max_user_login_length}}" placeholder="Логин"> --}}
+                <label class="counter" string="0/{{max_user_login_length}}">
+                    <input id="input_login" type="text" placeholder="Логин">
+                </label>
+                <div class="password_box">
+                    <div class="password-unhide-button-container">
+                        <i class="bi bi-eye-fill"></i>
+                        <input type="checkbox" id="password_unhide_button">
+                    </div>
+                    <label class="counter" string="0/{{max_user_password_length}}">
+                        <input id="input_password" type="password" placeholder="Пароль">
+                    </label>
+                </div>
+
+                <div id="register_error_message"></div>
+                
+                <button id="submit_button">Подтвердить.</button>
+                <a href="/authorization_page">У меня уже есть аккаунт.</a>
+                {{!-- <button id="titikaka">Титикака</button> --}}
+            </form>
+        </div>
+    </div>
+
+    <footer></footer>
+    <script defer src="scripts/register_scripts.js"></script>
+</body>
+</html>
