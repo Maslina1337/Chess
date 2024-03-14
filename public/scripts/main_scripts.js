@@ -1,0 +1,1 @@
+let page_allow_to_show_game_search_field = true;
